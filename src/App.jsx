@@ -5,7 +5,7 @@ import Collection from "./pages/Collection";
 import Useful from "./pages/Useful";
 import Contact from "./pages/Contact";
 import Login from "./pages/login";
-import Supports from "./pages/Supports";
+import Supports from "./pages/supports";
 import PostDetail from "./pages/PostDetail";
 
 function App() {
