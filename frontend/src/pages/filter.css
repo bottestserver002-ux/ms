@@ -1,0 +1,78 @@
+.filter-box {
+  margin-bottom: 20px;
+}
+
+.filter-select {
+  padding: 10px 14px;
+
+  border-radius: 12px;
+
+  border: 1px solid #dbeafe;
+
+  background: #06090a;
+
+  color: rgb(110, 233, 255);
+
+  font-weight: 600;
+
+  outline: none;
+
+  cursor: pointer;
+
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25);
+
+  transition: all 0.25s ease;
+}
+.filter-ok {
+  padding: 10px 14px;
+
+  border-radius: 12px;
+
+
+  background: #06090a;
+
+  color: rgb(110, 233, 255);
+
+  font-weight: 600;
+
+  outline: none;
+
+  cursor: pointer;
+
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25);
+
+  transition: all 0.25s ease;
+}
+
+
+/* hover */
+.filter-select:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(71, 221, 255, 0.35);
+}
+
+/* option (giới hạn browser nhưng vẫn set được) */
+.filter-select option {
+  background: white;
+  color: #1e3a8a;
+}
+.top-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+/* ép cùng chiều cao */
+.top-bar select,
+.top-bar button {
+  height: 48px;
+  display: flex;
+  align-items: center;
+}
+
+/* nếu button bị lệch chữ */
+.top-bar button {
+  padding: 0 24px;
+  line-height: 1;
+}
