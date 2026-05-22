@@ -41,9 +41,21 @@ export default function Login() {
         const data = await login(form);
 
       localStorage.setItem("token", data.token);
-localStorage.setItem("is_admin", data.is_admin);
-localStorage.setItem("username", data.username);
-localStorage.setItem("email", data.email);
+
+localStorage.setItem(
+  "is_admin",
+  data.user.is_admin
+);
+
+localStorage.setItem(
+  "username",
+  data.user.username
+);
+
+localStorage.setItem(
+  "email",
+  data.user.email
+);
 
         navigate("/");
       }
