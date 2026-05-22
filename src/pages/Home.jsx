@@ -141,7 +141,12 @@ export default function Home() {
         />
 
       </div>
+      {/* COPYRIGHT */}
+      <footer className="copyright">
+        © Copyright by MANHTRUONG
+      </footer>
 
     </div>
+    
   );
 } 

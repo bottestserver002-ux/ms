@@ -478,3 +478,10 @@ p {
   box-shadow:
     0 12px 25px rgba(37,99,235,0.45);
 }
+.copyright{
+  text-align: center;
+  color: #ffffffb0;
+  font-size: 14px;
+  padding: 20px 0 30px;
+  letter-spacing: 1px;
+}
