@@ -485,3 +485,32 @@ p {
   padding: 20px 0 30px;
   letter-spacing: 1px;
 }
+.edit-btn{
+  padding: 8px 14px;
+  border: none;
+  border-radius: 10px;
+  background: #0099ff;
+  color: white;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: 0.3s;
+}
+
+.edit-btn:hover{
+  transform: scale(1.05);
+}
+
+.delete-btn{
+  padding: 8px 14px;
+  border: none;
+  border-radius: 10px;
+  background: #ff3b3b;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.delete-btn:hover{
+  background: #d80000;
+  transform: scale(1.05);
+}

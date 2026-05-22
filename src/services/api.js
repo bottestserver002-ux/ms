@@ -82,3 +82,42 @@ export const addPost = async (data) => {
     body: JSON.stringify(data),
   });
 };
+/* =========================
+   UPDATE / DELETE POEMS
+========================= */
+
+export const deletePoem = async (id) => {
+  return fetch(`${API}/poems/${id}`, {
+    method: "DELETE",
+  });
+};
+
+export const updatePoem = async (id, data) => {
+  return fetch(`${API}/poems/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+};
+
+/* =========================
+   UPDATE / DELETE POSTS
+========================= */
+
+export const deletePost = async (id) => {
+  return fetch(`${API}/posts/${id}`, {
+    method: "DELETE",
+  });
+};
+
+export const updatePost = async (id, data) => {
+  return fetch(`${API}/posts/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+};

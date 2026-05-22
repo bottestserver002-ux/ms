@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
-import { addPoem, getPoems } from "../services/api";
+import { addPoem, getPoems, deletePoem, updatePoem } from "../services/api";
 import "./modal.css";
 import "./login.css";
 import "./filter.css";
@@ -12,6 +12,7 @@ export default function Collection() {
   const [filter, setFilter] = useState("all");
 
   const [openForm, setOpenForm] = useState(false);
+  const [editingId, setEditingId] = useState(null);
 
   const [form, setForm] = useState({
     title: "",
@@ -36,11 +37,50 @@ export default function Collection() {
   };
 
   const handleAdd = async () => {
+
+  if (editingId) {
+
+    await updatePoem(editingId, form);
+
+  } else {
+
     await addPoem(form);
-    setOpenForm(false);
-    setForm({ title: "", category: "", content: "" });
-    fetchPoems();
-  };
+
+  }
+
+  setEditingId(null);
+
+  setOpenForm(false);
+
+  setForm({
+    title: "",
+    category: "",
+    content: "",
+  });
+
+  fetchPoems();
+};
+const handleDelete = async (id) => {
+
+  if (!window.confirm("Bạn muốn xóa bài này?")) return;
+
+  await deletePoem(id);
+
+  fetchPoems();
+};
+
+const handleEdit = (poem) => {
+
+  setEditingId(poem.id);
+
+  setForm({
+    title: poem.title,
+    category: poem.category,
+    content: poem.content,
+  });
+
+  setOpenForm(true);
+};
 
   const categories = [
     "Tất cả",
@@ -121,16 +161,41 @@ export default function Collection() {
   </div>
 )}
 
-      {/* LIST */}
       {filtered.map((p) => (
-        <div key={p.id} className="card" style={{ marginTop: 20 }}>
-          <h3>{p.title}</h3>
-         <small>
-  <strong>Thể thơ:</strong> "{p.category}"
-</small>
-          <p style={{ whiteSpace: "pre-line" }}>{p.content}</p>
-        </div>
-      ))}
+  <div key={p.id} className="card" style={{ marginTop: 20 }}>
+
+    <h3>{p.title}</h3>
+
+    <small>
+      <strong>Thể thơ:</strong> "{p.category}"
+    </small>
+
+    <p style={{ whiteSpace: "pre-line" }}>
+      {p.content}
+    </p>
+
+    {isAdmin && (
+      <div style={{ marginTop: 15 }}>
+
+        <button
+          className="edit-btn"
+          onClick={() => handleEdit(p)}
+        >
+          ✏️ Sửa
+        </button>
+
+        <button
+          className="delete-btn"
+          onClick={() => handleDelete(p.id)}
+        >
+          ❌ Xóa
+        </button>
+
+      </div>
+    )}
+
+  </div>
+))}
     </div>
   );
 }

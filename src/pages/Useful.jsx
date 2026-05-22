@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
-import { getPosts, addPost } from "../services/api";
+import { getPosts, addPost, deletePost, updatePost } from "../services/api";
 import { useNavigate } from "react-router-dom";
 
 import "./modal.css";
@@ -14,6 +14,7 @@ export default function Useful() {
   const [posts, setPosts] = useState([]);
 
   const [openForm, setOpenForm] = useState(false);
+  const [editingId, setEditingId] = useState(null);
 
   const [form, setForm] = useState({
     title: "",
@@ -39,18 +40,49 @@ export default function Useful() {
 
   const handleAdd = async () => {
 
+  if (editingId) {
+
+    await updatePost(editingId, form);
+
+  } else {
+
     await addPost(form);
 
-    setOpenForm(false);
+  }
 
-    setForm({
-      title: "",
-      image: "",
-      content: "",
-    });
+  setEditingId(null);
 
-    fetchPosts();
-  };
+  setOpenForm(false);
+
+  setForm({
+    title: "",
+    image: "",
+    content: "",
+  });
+
+  fetchPosts();
+};
+const handleDelete = async (id) => {
+
+  if (!window.confirm("Bạn muốn xóa bài này?")) return;
+
+  await deletePost(id);
+
+  fetchPosts();
+};
+
+const handleEdit = (post) => {
+
+  setEditingId(post.id);
+
+  setForm({
+    title: post.title,
+    image: post.image,
+    content: post.content,
+  });
+
+  setOpenForm(true);
+};
 
   return (
     <div className="container">
@@ -65,6 +97,8 @@ export default function Useful() {
         >
           + Thêm bài viết
         </button>
+        
+        
       )}
 
       {/* MODAL */}
@@ -151,6 +185,30 @@ export default function Useful() {
 >
   Xem chi tiết
 </button>
+
+
+        {/* ADMIN BUTTONS */}
+        {isAdmin && (
+
+          <div style={{ marginTop: 12 }}>
+
+            <button
+              className="edit-btn"
+              onClick={() => handleEdit(p)}
+            >
+              ✏️ Sửa
+            </button>
+
+            <button
+              className="delete-btn"
+              onClick={() => handleDelete(p.id)}
+            >
+              ❌ Xóa
+            </button>
+
+          </div>
+
+        )}
 
       </div>
 
