@@ -1,17 +1,28 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
-import { addPoem, getPoems, deletePoem, updatePoem } from "../services/api";
+import {
+  addPoem,
+  getPoems,
+  deletePoem,
+  updatePoem
+} from "../services/api";
+
 import "./modal.css";
 import "./login.css";
 import "./filter.css";
 
+
 export default function Collection() {
-  const isAdmin = localStorage.getItem("is_admin") === "true";
+
+  const isAdmin =
+    localStorage.getItem("is_admin") === "true";
 
   const [poems, setPoems] = useState([]);
+
   const [filter, setFilter] = useState("all");
 
   const [openForm, setOpenForm] = useState(false);
+
   const [editingId, setEditingId] = useState(null);
 
   const [form, setForm] = useState({
@@ -25,11 +36,14 @@ export default function Collection() {
   }, []);
 
   const fetchPoems = async () => {
+
     const data = await getPoems();
+
     setPoems(data);
   };
 
   const handleChange = (e) => {
+
     setForm({
       ...form,
       [e.target.name]: e.target.value,
@@ -38,49 +52,49 @@ export default function Collection() {
 
   const handleAdd = async () => {
 
-  if (editingId) {
+    if (editingId) {
 
-    await updatePoem(editingId, form);
+      await updatePoem(editingId, form);
 
-  } else {
+    } else {
 
-    await addPoem(form);
+      await addPoem(form);
+    }
 
-  }
+    setEditingId(null);
 
-  setEditingId(null);
+    setOpenForm(false);
 
-  setOpenForm(false);
+    setForm({
+      title: "",
+      category: "",
+      content: "",
+    });
 
-  setForm({
-    title: "",
-    category: "",
-    content: "",
-  });
+    fetchPoems();
+  };
 
-  fetchPoems();
-};
-const handleDelete = async (id) => {
+  const handleDelete = async (id) => {
 
-  if (!window.confirm("Bạn muốn xóa bài này?")) return;
+    if (!window.confirm("Bạn muốn xóa bài này?")) return;
 
-  await deletePoem(id);
+    await deletePoem(id);
 
-  fetchPoems();
-};
+    fetchPoems();
+  };
 
-const handleEdit = (poem) => {
+  const handleEdit = (poem) => {
 
-  setEditingId(poem.id);
+    setEditingId(poem.id);
 
-  setForm({
-    title: poem.title,
-    category: poem.category,
-    content: poem.content,
-  });
+    setForm({
+      title: poem.title,
+      category: poem.category,
+      content: poem.content,
+    });
 
-  setOpenForm(true);
-};
+    setOpenForm(true);
+  };
 
   const categories = [
     "Tất cả",
@@ -94,108 +108,152 @@ const handleEdit = (poem) => {
 
   return (
     <div className="container">
-      <Navbar />
-    
-     {/* FILTER */}
-<div className="filter-box">
-  <select
-    className="filter-select"
-    onChange={(e) => setFilter(e.target.value)}
-  >
-    <option value="all">Tất cả</option>
 
-    {categories
-      .filter((c) => c !== "Tất cả")
-      .map((c, i) => (
-        <option key={i} value={c}>
-          {c}
-        </option>
-      ))}
-  </select>
-</div>
-      {/* BUTTON ADD (ADMIN ONLY) */}
-  
+      <Navbar />
+
+      {/* FILTER */}
+      <div className="filter-box">
+
+        <select
+          className="filter-select"
+          onChange={(e) => setFilter(e.target.value)}
+        >
+
+          <option value="all">
+            Tất cả
+          </option>
+
+          {categories
+            .filter((c) => c !== "Tất cả")
+            .map((c, i) => (
+
+              <option key={i} value={c}>
+                {c}
+              </option>
+
+            ))}
+
+        </select>
+
+      </div>
+
+      {/* BUTTON ADD */}
       {isAdmin && (
-        <button onClick={() => setOpenForm(!openForm)}>
-           
+
+        <button
+          onClick={() => setOpenForm(!openForm)}
+        >
           + Thêm bài thơ
         </button>
-       
-        
+
       )}
-    
-        
 
-      {/* FORM ADD */}
-     {openForm && (
-  <div className="modal-overlay" onClick={() => setOpenForm(false)}>
-    <div className="modal-card" onClick={(e) => e.stopPropagation()}>
+      {/* FORM */}
+      {openForm && (
 
-      <h2>✨ Thêm bài thơ mới</h2>
+        <div
+          className="modal-overlay"
+          onClick={() => setOpenForm(false)}
+        >
 
-      <input
-        name="title"
-        placeholder="Tên bài thơ"
-        onChange={handleChange}
-      />
+          <div
+            className="modal-card"
+            onClick={(e) => e.stopPropagation()}
+          >
 
-      <input
-        name="category"
-        placeholder="Thể thơ (ngũ ngôn, thất ngôn,...)"
-        onChange={handleChange}
-      />
+            <h2>
+              ✨ Thêm bài thơ mới
+            </h2>
 
-      <textarea
-        name="content"
-        placeholder="Nội dung bài thơ..."
-        rows={6}
-        onChange={handleChange}
-      />
+            <input
+              name="title"
+              placeholder="Tên bài thơ"
+              onChange={handleChange}
+              value={form.title}
+            />
 
-      <div className="modal-actions">
-        <button onClick={handleAdd}>💾 Lưu</button>
-        <button onClick={() => setOpenForm(false)}>❌ Huỷ</button>
+            <input
+              name="category"
+              placeholder="Thể thơ"
+              onChange={handleChange}
+              value={form.category}
+            />
+
+            <textarea
+              name="content"
+              placeholder="Nội dung bài thơ..."
+              rows={6}
+              onChange={handleChange}
+              value={form.content}
+            />
+
+            <div className="modal-actions">
+
+              <button onClick={handleAdd}>
+                💾 Lưu
+              </button>
+
+              <button
+                onClick={() => setOpenForm(false)}
+              >
+                ❌ Huỷ
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+      )}
+
+      {/* GRID */}
+      <div className="poem-grid">
+
+        {filtered.map((p) => (
+
+          <div
+            key={p.id}
+            className="poem-card"
+          >
+
+            <h3>{p.title}</h3>
+
+            <div className="poem-category">
+              {p.category}
+            </div>
+
+            <div className="poem-content">
+              {p.content}
+            </div>
+
+            {isAdmin && (
+
+              <div className="poem-actions">
+
+                <button
+                  className="edit-btn"
+                  onClick={() => handleEdit(p)}
+                >
+                  ✏️ Sửa
+                </button>
+
+                <button
+                  className="delete-btn"
+                  onClick={() => handleDelete(p.id)}
+                >
+                  ❌ Xóa
+                </button>
+
+              </div>
+
+            )}
+
+          </div>
+
+        ))}
+
       </div>
 
-    </div>
-  </div>
-)}
-
-      {filtered.map((p) => (
-  <div key={p.id} className="card" style={{ marginTop: 20 }}>
-
-    <h3>{p.title}</h3>
-
-    <small>
-      <strong>Thể thơ:</strong> "{p.category}"
-    </small>
-
-    <p style={{ whiteSpace: "pre-line" }}>
-      {p.content}
-    </p>
-
-    {isAdmin && (
-      <div style={{ marginTop: 15 }}>
-
-        <button
-          className="edit-btn"
-          onClick={() => handleEdit(p)}
-        >
-          ✏️ Sửa
-        </button>
-
-        <button
-          className="delete-btn"
-          onClick={() => handleDelete(p.id)}
-        >
-          ❌ Xóa
-        </button>
-
-      </div>
-    )}
-
-  </div>
-))}
     </div>
   );
 }

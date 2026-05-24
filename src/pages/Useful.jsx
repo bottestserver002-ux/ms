@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import { getPosts, addPost, deletePost, updatePost } from "../services/api";
 import { useNavigate } from "react-router-dom";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 import "./modal.css";
 
@@ -127,12 +129,18 @@ const handleEdit = (post) => {
               onChange={handleChange}
             />
 
-            <textarea
-              name="content"
-              rows={7}
-              placeholder="Nội dung chi tiết..."
-              onChange={handleChange}
-            />
+           <ReactQuill
+  theme="snow"
+  value={form.content}
+  onChange={(value) =>
+    setForm({
+      ...form,
+      content: value,
+    })
+  }
+  placeholder="Nội dung..."
+  className="useful-editor"
+/>
 
             <div className="modal-actions">
 
@@ -175,9 +183,12 @@ const handleEdit = (post) => {
           {p.title}
         </h3>
 
-        <p>
-          {p.content.slice(0, 70)}...
-        </p>
+        <div
+  className="useful-content"
+  dangerouslySetInnerHTML={{
+    __html: p.content.slice(0, 160) + "...",
+  }}
+/>
 
         <button
   className="detail-btn"

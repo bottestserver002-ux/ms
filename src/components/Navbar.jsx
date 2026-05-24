@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 
@@ -8,64 +8,97 @@ export default function Navbar() {
 
   const username = localStorage.getItem("username");
 
+  const [openMenu, setOpenMenu] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+
+  const handleScroll = () => {
+
+    if (window.scrollY > 30) {
+      setScrolled(true);
+    } else {
+      setScrolled(false);
+    }
+  };
+
+  window.addEventListener("scroll", handleScroll);
+
+  return () => {
+    window.removeEventListener("scroll", handleScroll);
+  };
+
+}, []);
+
   const handleLogout = () => {
     localStorage.clear();
     navigate("/login");
   };
 
   return (
-    <nav>
+    <nav className="navbar">
 
-      {/* LOGO */}
-      <img
-        src={logo}
-        alt="logo"
-        className="logo"
-      />
+      {/* NAVBAR CONTAINER */}
+      <div className={`navbar-inner ${scrolled ? "scrolled" : ""}`}>
 
-      {/* MENU */}
-      <div className="menu">
+        {/* MOBILE BUTTON */}
+        <button
+          className="menu-toggle"
+          onClick={() => setOpenMenu(!openMenu)}
+        >
+          ☰
+        </button>
 
-        <Link to="/">Trang chủ</Link>
+        {/* LEFT MENU */}
+        <div className={`menu left-menu ${openMenu ? "active" : ""}`}>
 
-        <Link to="/collection">Sưu tập</Link>
+          <Link to="/">Trang chủ</Link>
 
-        <Link to="/useful">Bổ ích</Link>
+          <Link to="/collection">Sưu tập</Link>
 
-        <Link to="/contact">Liên hệ</Link>
+          <Link to="/useful">Bổ ích</Link>
 
-        <Link to="/supports">Hỏi AI</Link>
+        </div>
 
-        {/* AUTH AREA */}
-        {
-          username ? (
-            <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
+        {/* LOGO */}
+        <div className="logo-center">
+          <img
+            src={logo}
+            alt="logo"
+            className="logo"
+          />
+        </div>
 
-              <span style={{ color: "#2563eb", fontWeight: "bold" }}>
-                Xin chào, {username}
-              </span>
+        {/* RIGHT MENU */}
+        <div className={`menu right-menu ${openMenu ? "active" : ""}`}>
 
-              <button
-                onClick={handleLogout}
-                style={{
-                  padding: "6px 12px",
-                  border: "none",
-                  borderRadius: "8px",
-                  background: "#2563eb",
-                  color: "white",
-                  cursor: "pointer"
-                }}
-              >
-                Đăng xuất
-              </button>
+          <Link to="/contact">Liên hệ</Link>
 
-            </div>
-          ) : (
-            <Link to="/login">
-              Đăng nhập / Đăng ký
-            </Link>
-          )
-        }
+          <Link to="/supports">Hỏi AI</Link>
+
+          {
+            username ? (
+              <div className="auth-box">
+
+                <span className="hello-text">
+                  {username}
+                </span>
+
+                <button
+                  onClick={handleLogout}
+                  className="logout-btn"
+                >
+                  Đăng xuất
+                </button>
+
+              </div>
+            ) : (
+              <Link to="/login">
+                Đăng nhập
+              </Link>
+            )
+          }
+
+        </div>
 
       </div>
 

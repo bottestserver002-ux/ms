@@ -27,8 +27,7 @@ export default function Home() {
           </p>
 
           <p>
-            Hiện tôi đang là nhân viên tư vấn website tại công ty Nasani,
-            vì vậy tôi luôn mong muốn mang đến những giá trị thiết thực
+            Tại đây tôi luôn mong muốn mang đến những giá trị thiết thực
             và trải nghiệm tốt nhất cho người đọc.
           </p>
 
@@ -49,104 +48,163 @@ export default function Home() {
             className="profile-img"
           />
 
-          <h3>Nguyễn Văn Mạnh Trường</h3>
-          <h3>Leader</h3>
-
         </div>
 
       </div>
-      {/* NEWS */}
-<div className="news-section">
+{/* SOFT SKILLS */}
+<div className="skills-section">
 
-  <h2>Tin mới</h2>
+  <div className="skills-title">
+    <h2>Kỹ năng mềm</h2>
 
-  <div className="news-grid">
+    <p>
+      Một số kỹ năng và trải nghiệm cá nhân
+      tôi đã tích lũy trong quá trình học tập
+      và làm việc.
+    </p>
+  </div>
 
-    {/* CARD 1 */}
-    <a
-      href="https://vnexpress.net"
-      target="_blank"
-      rel="noreferrer"
-      className="news-card"
-    >
-      <img
-        src="https://images.unsplash.com/photo-1518770660439-4636190af475"
-        alt="news"
-      />
+  <div className="skills-grid">
 
-      <div className="news-content">
-        <h3>AI đang thay đổi ngành công nghệ toàn cầu</h3>
+    <div className="modern-skill-card">
+      <div className="skill-emoji">🎬</div>
 
-        <p>
-          Trí tuệ nhân tạo đang bùng nổ mạnh mẽ,
-          ảnh hưởng đến lập trình, thiết kế và kinh doanh.
-        </p>
-      </div>
-    </a>
+      <h3>Edit video cơ bản</h3>
 
-    {/* CARD 2 */}
-    <a
-      href="https://cafef.vn"
-      target="_blank"
-      rel="noreferrer"
-      className="news-card"
-    >
-      <img
-        src="https://images.unsplash.com/photo-1559526324-593bc073d938"
-        alt="trade"
-      />
+      <span>
+        CapCut chỉnh sửa video ngắn.
+      </span>
+    </div>
 
-      <div className="news-content">
-        <h3>Trade crypto tiếp tục biến động mạnh</h3>
+    <div className="modern-skill-card">
+      <div className="skill-emoji">🎨</div>
 
-        <p>
-          Bitcoin và Altcoin xuất hiện nhiều đợt tăng giảm lớn,
-          thu hút lượng lớn nhà đầu tư mới.
-        </p>
-      </div>
-    </a>
+      <h3>Design ảnh cơ bản</h3>
 
-    {/* CARD 3 */}
-    <a
-      href="https://thanhnien.vn"
-      target="_blank"
-      rel="noreferrer"
-      className="news-card"
-    >
-      <img
-        src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3"
-        alt="technology"
-      />
+      <span>
+        Canva, Photoshop cơ bản,
+        thiết kế social media.
+      </span>
+    </div>
 
-      <div className="news-content">
-        <h3>Xu hướng website AI cá nhân hóa người dùng</h3>
+    <div className="modern-skill-card">
+      <div className="skill-emoji">🗣️</div>
 
-        <p>
-          Các website hiện đại đang tích hợp AI hỗ trợ,
-          giúp tăng trải nghiệm và giữ chân khách hàng.
-        </p>
-      </div>
-    </a>
+      <h3>Kỹ năng giao tiếp</h3>
+
+      <span>
+        Làm việc nhóm, tư vấn,
+        hỗ trợ khách hàng.
+      </span>
+    </div>
+
+    
+
+    <div className="modern-skill-card">
+      <div className="skill-emoji">⚡</div>
+
+      <h3>Khả năng thích nghi</h3>
+
+      <span>
+        Tiếp cận nhanh môi trường
+        và công nghệ mới.
+      </span>
+    </div>
 
   </div>
 
 </div>
+      {/* NEWS */}
+      <div className="news-section">
 
-      {/* GOOGLE */}
-      <div className="google">
+        <h2>Tin mới</h2>
+
+        <div className="news-grid">
+
+          {/* CARD 1 */}
+          <a
+            href="https://vnexpress.net"
+            target="_blank"
+            rel="noreferrer"
+            className="news-card"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1518770660439-4636190af475"
+              alt="news"
+            />
+
+            <div className="news-content">
+              <h3>AI đang thay đổi ngành công nghệ toàn cầu</h3>
+
+              <p>
+                Trí tuệ nhân tạo đang bùng nổ mạnh mẽ,
+                ảnh hưởng đến lập trình, thiết kế và kinh doanh.
+              </p>
+            </div>
+          </a>
+
+          {/* CARD 2 */}
+          <a
+            href="https://cafef.vn"
+            target="_blank"
+            rel="noreferrer"
+            className="news-card"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1559526324-593bc073d938"
+              alt="trade"
+            />
+
+            <div className="news-content">
+              <h3>Trade crypto tiếp tục biến động mạnh</h3>
+
+              <p>
+                Bitcoin và Altcoin xuất hiện nhiều đợt tăng giảm lớn,
+                thu hút lượng lớn nhà đầu tư mới.
+              </p>
+            </div>
+          </a>
+
+          {/* CARD 3 */}
+          <a
+            href="https://thanhnien.vn"
+            target="_blank"
+            rel="noreferrer"
+            className="news-card"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3"
+              alt="technology"
+            />
+
+            <div className="news-content">
+              <h3>Xu hướng website AI cá nhân hóa người dùng</h3>
+
+              <p>
+                Các website hiện đại đang tích hợp AI hỗ trợ,
+                giúp tăng trải nghiệm và giữ chân khách hàng.
+              </p>
+            </div>
+          </a>
+
+        </div>
+
+      </div>
+
+      <footer className="copyright">
 
         <img
           src={avatar1}
           alt="google"
+          className="copyright-logo"
         />
 
-      </div>
-      {/* COPYRIGHT */}
-      <footer className="copyright">
-        © Copyright by MANHTRUONG
+        <span>
+          © Copyright by MANHTRUONG
+        </span>
+
       </footer>
 
     </div>
-    
   );
-} 
+}

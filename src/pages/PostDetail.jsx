@@ -62,9 +62,12 @@ export default function PostDetail() {
           {post.title}
         </h1>
 
-        <p className="detail-content">
-          {post.content}
-        </p>
+       <div
+  className="detail-content"
+  dangerouslySetInnerHTML={{
+    __html: post.content,
+  }}
+/>
 
       </div>
 
