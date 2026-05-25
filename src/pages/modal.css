@@ -5,8 +5,8 @@
   position: fixed;
   inset: 0;
 
-  background: rgba(15, 23, 42, 0.55);
-  backdrop-filter: blur(8px);
+  background: rgba(2, 6, 23, 0.72);
+  backdrop-filter: blur(10px);
 
   display: flex;
   justify-content: center;
@@ -14,56 +14,55 @@
 
   z-index: 999;
 
-  animation: fadeIn 0.2s ease;
+  animation: fadeIn 0.25s ease;
 }
 
 /* =========================
    MODAL CARD
 ========================= */
 .modal-card {
-  width: 420px;
-  max-width: 92vw;
+  width: 700px;
+  max-width: 95vw;
 
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.92),
-    rgba(219, 234, 254, 0.85)
-  );
+  background: rgba(10, 25, 60, 0.88);
 
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(18px);
 
-  border-radius: 24px;
+  border-radius: 28px;
 
   padding: 28px;
 
+  border: 1px solid rgba(59, 130, 246, 0.35);
+
   box-shadow:
-    0 20px 60px rgba(37, 99, 235, 0.25),
-    0 10px 25px rgba(0, 0, 0, 0.12);
+    0 0 30px rgba(37, 99, 235, 0.25),
+    0 0 80px rgba(0, 0, 0, 0.45);
 
   animation: pop 0.25s ease;
 
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: white;
 
   position: relative;
   overflow: hidden;
 }
 
-/* glow nhẹ nền */
+/* glow */
 .modal-card::before {
   content: "";
-  position: absolute;
-  inset: -40px;
 
-  background: radial-gradient(
-    circle at top left,
-    rgba(59, 130, 246, 0.25),
-    transparent 60%
-  );
+  position: absolute;
+  inset: -100px;
+
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(59, 130, 246, 0.22),
+      transparent 45%
+    );
 
   z-index: 0;
 }
 
-/* đảm bảo content nằm trên effect */
 .modal-card * {
   position: relative;
   z-index: 1;
@@ -73,115 +72,190 @@
    TITLE
 ========================= */
 .modal-card h2 {
-  margin-bottom: 18px;
-
-  color: #1e3a8a;
-
   text-align: center;
 
-  font-size: 22px;
+  margin-bottom: 22px;
+
+  color: #60a5fa;
+
+  font-size: 28px;
   font-weight: 700;
 }
 
 /* =========================
-   INPUT + TEXTAREA
+   INPUT
 ========================= */
-.modal-card input,
-.modal-card textarea {
+.modal-card input {
   width: 100%;
 
-  margin-bottom: 12px;
+  padding: 14px 16px;
 
-  padding: 12px 14px;
+  margin-bottom: 14px;
 
-  border-radius: 14px;
+  border-radius: 16px;
 
-  border: 1px solid #c7d2fe;
+  border: 1px solid rgba(96, 165, 250, 0.25);
+
+  background: rgba(15, 23, 42, 0.85);
+
+  color: white;
+
+  font-size: 15px;
 
   outline: none;
 
-  background: rgba(255, 255, 255, 0.9);
-
-  font-size: 14px;
-
-  transition: all 0.25s ease;
-
-  box-sizing: border-box;
+  transition: 0.25s;
 }
 
-/* focus đẹp hơn */
-.modal-card input:focus,
-.modal-card textarea:focus {
+.modal-card input::placeholder {
+  color: rgba(255,255,255,0.45);
+}
+
+.modal-card input:focus {
   border-color: #3b82f6;
 
-  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
-}
-
-/* textarea cao hơn */
-.modal-card textarea {
-  min-height: 120px;
-  resize: none;
+  box-shadow:
+    0 0 0 4px rgba(59,130,246,0.18);
 }
 
 /* =========================
-   ACTION BUTTONS
+   QUILL EDITOR
+========================= */
+.useful-editor {
+  margin-top: 10px;
+}
+
+.useful-editor .ql-toolbar {
+  border-radius: 16px 16px 0 0;
+
+  border: 1px solid rgba(96,165,250,0.25);
+
+  background: rgba(15, 23, 42, 0.95);
+}
+
+.useful-editor .ql-container {
+  border-radius: 0 0 16px 16px;
+
+  border: 1px solid rgba(96,165,250,0.25);
+
+  background: rgba(15, 23, 42, 0.82);
+
+  color: white;
+
+  font-size: 16px;
+
+  min-height: 280px;
+
+  max-height: 450px;
+
+  overflow-y: auto;
+}
+
+/* chữ editor */
+.useful-editor .ql-editor {
+  color: white;
+
+  min-height: 280px;
+
+  line-height: 1.8;
+
+  font-size: 16px;
+}
+
+/* placeholder */
+.useful-editor .ql-editor.ql-blank::before {
+  color: rgba(255,255,255,0.4);
+  font-style: normal;
+}
+
+/* icon toolbar */
+.useful-editor .ql-stroke {
+  stroke: white !important;
+}
+
+.useful-editor .ql-fill {
+  fill: white !important;
+}
+
+.useful-editor .ql-picker {
+  color: white !important;
+}
+
+/* =========================
+   BUTTONS
 ========================= */
 .modal-actions {
   display: flex;
-  gap: 10px;
 
-  margin-top: 8px;
+  gap: 12px;
+
+  margin-top: 18px;
 }
 
 .modal-actions button {
   flex: 1;
 
-  padding: 12px;
+  padding: 14px;
 
   border: none;
-  border-radius: 14px;
 
-  cursor: pointer;
+  border-radius: 16px;
+
+  font-size: 15px;
 
   font-weight: 600;
 
-  transition: all 0.25s ease;
+  cursor: pointer;
+
+  transition: 0.25s;
 }
 
-/* nút primary */
+/* đăng bài */
 .modal-actions button:first-child {
-  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  background: linear-gradient(
+    135deg,
+    #2563eb,
+    #3b82f6
+  );
+
   color: white;
 
-  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.25);
+  box-shadow:
+    0 10px 25px rgba(37,99,235,0.35);
 }
 
 .modal-actions button:first-child:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 25px rgba(37, 99, 235, 0.35);
+
+  box-shadow:
+    0 15px 30px rgba(37,99,235,0.45);
 }
 
-/* nút cancel */
+/* huỷ */
 .modal-actions button:last-child {
-  background: rgba(229, 231, 235, 0.8);
-  color: #334155;
+  background: rgba(255,255,255,0.08);
+
+  color: white;
+
+  border: 1px solid rgba(255,255,255,0.12);
 }
 
 .modal-actions button:last-child:hover {
-  background: rgba(209, 213, 219, 0.9);
+  background: rgba(255,255,255,0.12);
 }
 
 /* =========================
-   ANIMATIONS
+   ANIMATION
 ========================= */
 @keyframes pop {
   from {
-    transform: scale(0.85);
     opacity: 0;
+    transform: scale(0.88);
   }
+
   to {
-    transform: scale(1);
     opacity: 1;
+    transform: scale(1);
   }
 }
 
@@ -189,6 +263,7 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }

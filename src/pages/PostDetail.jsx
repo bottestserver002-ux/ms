@@ -44,7 +44,7 @@ export default function PostDetail() {
 
       {/* BUTTON BACK */}
       <button
-        className="back-btn"
+        className="detail-btn"
         onClick={() => navigate("/useful")}
       >
         ← Trở về trang bổ ích

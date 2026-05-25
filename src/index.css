@@ -559,71 +559,122 @@ p {
 
   line-height: 1.6;
 }
-
 /* POSTS GRID */
 
 .posts-grid {
   display: grid;
-
   grid-template-columns: repeat(3, 1fr);
-
-  gap: 18px;
-
+  gap: 26px;
   margin-top: 30px;
 }
 
-/* POST CARD */
+/* CARD */
 
 .news-post-card {
-  background: rgba(255,255,255,0.95);
+  background: linear-gradient(
+    180deg,
+    rgba(7, 24, 74, 0.96),
+    rgba(5, 18, 58, 0.98)
+  );
 
-  border-radius: 14px;
+  border-radius: 24px;
 
   overflow: hidden;
 
-  transition: 0.3s;
+  transition: 0.35s ease;
 
   cursor: pointer;
+
+  border: 1px solid rgba(59,130,246,0.2);
+
+  display: flex;
+  flex-direction: column;
+
+  min-height: 650px;
 }
 
 .news-post-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px);
 
-  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+  box-shadow:
+    0 20px 40px rgba(0,0,0,0.35),
+    0 0 30px rgba(59,130,246,0.15);
 }
 
 .news-post-image {
   width: 100%;
-
-  height: 190px;
-
+  height: 240px;
   object-fit: cover;
 }
 
+/* CONTENT */
+
 .news-post-content {
-  padding: 14px;
+  padding: 22px;
+
+  display: flex;
+  flex-direction: column;
+
+  flex: 1;
 }
 
 .news-post-content h3 {
-  color: #111;
+  color: #fff;
 
-  font-size: 20px;
+  font-size: 21px;
 
-  line-height: 1.4;
+  line-height: 1.45;
 
-  margin-bottom: 10px;
+  margin-bottom: 16px;
 
-  font-weight: 600;
+  font-weight: 700;
 }
 
-.news-post-content p {
-  color: #666;
+/* CONTENT TEXT */
 
-  font-size: 15px;
+.useful-content {
+  color: rgba(255,255,255,0.72);
 
-  line-height: 1.5;
+  font-size: 16px;
+
+  line-height: 1.8;
+
+  flex: 1;
 }
 
+/* BUTTON */
+
+.detail-btn {
+  margin-top: auto;
+
+  align-self: flex-start;
+
+  padding: 12px 22px;
+
+  border: none;
+
+  border-radius: 14px;
+
+  background: linear-gradient(
+    135deg,
+    #3b82f6,
+    #2563eb
+  );
+
+  color: white;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: 0.3s ease;
+}
+
+.detail-btn:hover {
+  transform: translateY(-2px);
+
+  box-shadow: 0 10px 25px rgba(37,99,235,0.35);
+}
 /* BUTTON */
 
 .detail-btn,
@@ -933,6 +984,12 @@ p {
     0 0 30px rgba(59,130,246,0.08);
 
   overflow: hidden;
+
+  /* THÊM */
+  display: flex;
+  flex-direction: column;
+
+  min-height: 420px;
 }
 
 .poem-card:hover {
@@ -958,7 +1015,12 @@ p {
 /* CATEGORY */
 
 .poem-category {
-  display: inline-block;
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: fit-content;
 
   margin-bottom: 18px;
 
@@ -983,6 +1045,9 @@ p {
   color: rgba(255,255,255,0.92);
 
   font-size: 16px;
+
+  /* THÊM */
+  flex: 1;
 }
 
 /* ACTION BUTTONS */
@@ -992,7 +1057,11 @@ p {
 
   gap: 12px;
 
-  margin-top: 22px;
+  margin-top: auto;
+}
+
+.poem-actions button {
+  flex: 1;
 }
 
 /* MOBILE */
