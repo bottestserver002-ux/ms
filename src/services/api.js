@@ -121,3 +121,84 @@ export const updatePost = async (id, data) => {
     body: JSON.stringify(data),
   });
 };
+/* =========================
+   MINIGAME
+========================= */
+
+// lấy danh sách câu hỏi
+export const getMiniGames = async () => {
+
+  const res = await fetch(
+    `${API}/minigame`
+  );
+
+  return res.json();
+};
+
+
+// thêm câu hỏi + upload ảnh
+export const addMiniGame = async (
+  imageFile,
+  answer
+) => {
+
+  const formData = new FormData();
+
+  formData.append(
+    "image",
+    imageFile
+  );
+
+  formData.append(
+    "answer",
+    answer
+  );
+
+  return fetch(`${API}/minigame`, {
+    method: "POST",
+    body: formData,
+  });
+};
+
+
+// sửa câu hỏi
+export const updateMiniGame = async (
+  id,
+  imageFile,
+  answer
+) => {
+
+  const formData = new FormData();
+
+  formData.append(
+    "image",
+    imageFile
+  );
+
+  formData.append(
+    "answer",
+    answer
+  );
+
+  return fetch(
+    `${API}/minigame/${id}`,
+    {
+      method: "PUT",
+      body: formData,
+    }
+  );
+};
+
+
+// xóa câu hỏi
+export const deleteMiniGame = async (
+  id
+) => {
+
+  return fetch(
+    `${API}/minigame/${id}`,
+    {
+      method: "DELETE",
+    }
+  );
+};

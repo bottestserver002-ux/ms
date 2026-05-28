@@ -1,12 +1,17 @@
 import React from "react";
 import Navbar from "../components/Navbar";
+import { useNavigate } from "react-router-dom";
 
 import avatar from "../assets/s.png";
 import avatar1 from "../assets/gg.png";
+import minigameImg from "../assets/minigame.png";
+
+
 
 const username = localStorage.getItem("username");
 
 export default function Home() {
+  const navigate = useNavigate();
   return (
     <div className="container">
 
@@ -110,6 +115,55 @@ export default function Home() {
         và công nghệ mới.
       </span>
     </div>
+
+  </div>
+
+</div>
+{/* MINI GAME */}
+<div className="minigame-box">
+
+  <div className="minigame-left">
+
+    <img
+      src={minigameImg}
+      alt="Mini Game"
+      className="minigame-image"
+    />
+
+  </div>
+
+  <div className="minigame-right">
+
+    <h2>🎮 Mini Game</h2>
+
+    <p>
+      Giải trí nhẹ nhàng với khu vực mini game
+      vui nhộn và hấp dẫn.
+    </p>
+
+    <button
+  className="minigame-btn"
+  onClick={() => {
+
+    const username =
+      localStorage.getItem("username");
+
+    if (!username) {
+
+      alert(
+        "Bạn cần đăng nhập để chơi!"
+      );
+
+      navigate("/login");
+
+      return;
+    }
+
+    navigate("/minigame");
+  }}
+>
+  🎮 Chơi ngay
+</button>
 
   </div>
 

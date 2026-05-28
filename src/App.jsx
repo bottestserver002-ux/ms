@@ -7,6 +7,7 @@ import Contact from "./pages/Contact";
 import Login from "./pages/login";
 import Supports from "./pages/supports";
 import PostDetail from "./pages/PostDetail";
+import MiniGame from "./pages/MiniGame";
 
 function App() {
   return (
@@ -17,11 +18,15 @@ function App() {
         <Route path="/useful" element={<Useful />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
-<Route path="/supports" element={<Supports />} />
-<Route
-  path="/post/:id"
-  element={<PostDetail />}
-/>
+        <Route path="/supports" element={<Supports />} />
+        <Route
+          path="/minigame"
+          element={<MiniGame />}
+        />
+        <Route
+          path="/post/:id"
+          element={<PostDetail />}
+        />
       </Routes>
     </BrowserRouter>
   );
