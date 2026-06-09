@@ -45,17 +45,20 @@ export const login = async (data) => {
 };
 
 export const register = async (data) => {
-  const res = await fetch(`${API}/register`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
+
+  const res = await fetch(
+    `${API}/register`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }
+  );
 
   return res.json();
 };
-
 /* =========================
    AI SUPPORT
 ========================= */
@@ -201,4 +204,28 @@ export const deleteMiniGame = async (
       method: "DELETE",
     }
   );
+};
+
+export const forgotPassword = async (email) => {
+  const res = await fetch(`${API}/forgot-password`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email }),
+  });
+
+  return res.json();
+};
+
+export const resetPassword = async (data) => {
+  const res = await fetch(`${API}/reset-password`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
+  return res.json();
 };

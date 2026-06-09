@@ -216,3 +216,56 @@
     font-size: 14px;
   }
 }
+.otp-container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.otp-container input {
+  width: 100%;
+  box-sizing: border-box;
+  padding-right: 110px;
+}
+
+.otp-btn {
+  position: absolute;
+
+  right: 1px;
+  top: 4px;
+
+  width: 80px !important;
+  height: 40px !important;
+
+  display: flex;
+  align-items: center;      /* căn giữa dọc */
+  justify-content: center;  /* căn giữa ngang */
+
+
+  border: none;
+  border-radius: 20px;
+
+  background: linear-gradient(
+    135deg,
+    #4d8cff,
+    #2d62f5
+  );
+
+  color: white;
+  font-weight: 600;
+  font-size: 10px;
+
+  cursor: pointer;
+}
+
+.forgot-password {
+  margin-top: 10px;
+  color: #2563eb;
+  cursor: pointer;
+  font-size: 14px;
+  text-align: right;
+}
+
+.forgot-password:hover {
+  text-decoration: underline;
+}
