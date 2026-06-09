@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://manhtruong6723.id.vn/sitemap.xml
