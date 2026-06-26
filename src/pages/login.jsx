@@ -163,7 +163,7 @@ export default function Login() {
           otp,
         });
 
-        alert(data.message);
+        alert(data.message || data.detail || "Có lỗi xảy ra");
 
         if (
           data.message?.includes("thành công")
