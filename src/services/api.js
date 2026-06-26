@@ -229,3 +229,64 @@ export const resetPassword = async (data) => {
 
   return res.json();
 };
+
+export const getFoods = async () => {
+  const res = await fetch(`${API}/foods`);
+  return res.json();
+};
+
+export const addFood = async (name, category, imageFile) => {
+  const formData = new FormData();
+
+  formData.append("name", name);
+  formData.append("category", category);
+
+  if (imageFile) {
+    formData.append("image", imageFile);
+  }
+
+  const res = await fetch(`${API}/foods`, {
+    method: "POST",
+    body: formData,
+  });
+
+  return res.json();
+};
+
+export const updateFood = async (id, name, category, imageFile) => {
+  const formData = new FormData();
+
+  formData.append("name", name);
+  formData.append("category", category);
+
+  if (imageFile) {
+    formData.append("image", imageFile);
+  }
+
+  const res = await fetch(`${API}/foods/${id}`, {
+    method: "PUT",
+    body: formData,
+  });
+
+  return res.json();
+};
+
+export const deleteFood = async (id) => {
+  const res = await fetch(`${API}/foods/${id}`, {
+    method: "DELETE",
+  });
+
+  return res.json();
+};
+
+export const orderFood = async (data) => {
+  const res = await fetch(`${API}/foods/order`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
+  return res.json();
+};

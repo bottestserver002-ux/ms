@@ -8,6 +8,7 @@ import Login from "./pages/login";
 import Supports from "./pages/supports";
 import PostDetail from "./pages/PostDetail";
 import MiniGame from "./pages/MiniGame";
+import BookingFood from "./pages/BookingFood";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/supports" element={<Supports />} />
+        <Route path="/booking-food" element={<BookingFood />} />
         <Route
           path="/minigame"
           element={<MiniGame />}

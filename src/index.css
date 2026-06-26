@@ -1653,3 +1653,42 @@ p {
     width: 100%;
   }
 }
+.booking-food-btn {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 14px 18px;
+  border-radius: 999px;
+
+  background: linear-gradient(135deg, #ff9f1c, #ff6b35);
+  color: white;
+
+  font-weight: 700;
+  cursor: pointer;
+
+  box-shadow: 0 12px 30px rgba(255, 107, 53, 0.35);
+  transition: 0.25s ease;
+}
+
+.booking-food-btn:hover {
+  transform: translateY(-4px);
+}
+
+.burger-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(255, 255, 255, 0.25);
+  font-size: 20px;
+}

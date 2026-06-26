@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import { useNavigate } from "react-router-dom";
 
+
 import avatar from "../assets/s.png";
 import avatar1 from "../assets/gg.png";
 import minigameImg from "../assets/minigame.png";
@@ -12,6 +13,8 @@ const username = localStorage.getItem("username");
 
 export default function Home() {
   const navigate = useNavigate();
+  const isFamily =
+    localStorage.getItem("is_family") === "true";
   return (
     <div className="container">
 
@@ -56,118 +59,118 @@ export default function Home() {
         </div>
 
       </div>
-{/* SOFT SKILLS */}
-<div className="skills-section">
+      {/* SOFT SKILLS */}
+      <div className="skills-section">
 
-  <div className="skills-title">
-    <h2>Kỹ năng mềm</h2>
+        <div className="skills-title">
+          <h2>Kỹ năng mềm</h2>
 
-    <p>
-      Một số kỹ năng và trải nghiệm cá nhân
-      tôi đã tích lũy trong quá trình học tập
-      và làm việc.
-    </p>
-  </div>
+          <p>
+            Một số kỹ năng và trải nghiệm cá nhân
+            tôi đã tích lũy trong quá trình học tập
+            và làm việc.
+          </p>
+        </div>
 
-  <div className="skills-grid">
+        <div className="skills-grid">
 
-    <div className="modern-skill-card">
-      <div className="skill-emoji">🎬</div>
+          <div className="modern-skill-card">
+            <div className="skill-emoji">🎬</div>
 
-      <h3>Edit video cơ bản</h3>
+            <h3>Edit video cơ bản</h3>
 
-      <span>
-        CapCut chỉnh sửa video ngắn.
-      </span>
-    </div>
+            <span>
+              CapCut chỉnh sửa video ngắn.
+            </span>
+          </div>
 
-    <div className="modern-skill-card">
-      <div className="skill-emoji">🎨</div>
+          <div className="modern-skill-card">
+            <div className="skill-emoji">🎨</div>
 
-      <h3>Design ảnh cơ bản</h3>
+            <h3>Design ảnh cơ bản</h3>
 
-      <span>
-        Canva, Photoshop cơ bản,
-        thiết kế social media.
-      </span>
-    </div>
+            <span>
+              Canva, Photoshop cơ bản,
+              thiết kế social media.
+            </span>
+          </div>
 
-    <div className="modern-skill-card">
-      <div className="skill-emoji">🗣️</div>
+          <div className="modern-skill-card">
+            <div className="skill-emoji">🗣️</div>
 
-      <h3>Kỹ năng giao tiếp</h3>
+            <h3>Kỹ năng giao tiếp</h3>
 
-      <span>
-        Làm việc nhóm, tư vấn,
-        hỗ trợ khách hàng.
-      </span>
-    </div>
+            <span>
+              Làm việc nhóm, tư vấn,
+              hỗ trợ khách hàng.
+            </span>
+          </div>
 
-    
 
-    <div className="modern-skill-card">
-      <div className="skill-emoji">⚡</div>
 
-      <h3>Khả năng thích nghi</h3>
+          <div className="modern-skill-card">
+            <div className="skill-emoji">⚡</div>
 
-      <span>
-        Tiếp cận nhanh môi trường
-        và công nghệ mới.
-      </span>
-    </div>
+            <h3>Khả năng thích nghi</h3>
 
-  </div>
+            <span>
+              Tiếp cận nhanh môi trường
+              và công nghệ mới.
+            </span>
+          </div>
 
-</div>
-{/* MINI GAME */}
-<div className="minigame-box">
+        </div>
 
-  <div className="minigame-left">
+      </div>
+      {/* MINI GAME */}
+      <div className="minigame-box">
 
-    <img
-      src={minigameImg}
-      alt="Mini Game"
-      className="minigame-image"
-    />
+        <div className="minigame-left">
 
-  </div>
+          <img
+            src={minigameImg}
+            alt="Mini Game"
+            className="minigame-image"
+          />
 
-  <div className="minigame-right">
+        </div>
 
-    <h2>🎮 Mini Game</h2>
+        <div className="minigame-right">
 
-    <p>
-      Giải trí nhẹ nhàng với khu vực mini game
-      vui nhộn và hấp dẫn.
-    </p>
+          <h2>🎮 Mini Game</h2>
 
-    <button
-  className="minigame-btn"
-  onClick={() => {
+          <p>
+            Giải trí nhẹ nhàng với khu vực mini game
+            vui nhộn và hấp dẫn.
+          </p>
 
-    const username =
-      localStorage.getItem("username");
+          <button
+            className="minigame-btn"
+            onClick={() => {
 
-    if (!username) {
+              const username =
+                localStorage.getItem("username");
 
-      alert(
-        "Bạn cần đăng nhập để chơi!"
-      );
+              if (!username) {
 
-      navigate("/login");
+                alert(
+                  "Bạn cần đăng nhập để chơi!"
+                );
 
-      return;
-    }
+                navigate("/login");
 
-    navigate("/minigame");
-  }}
->
-  🎮 Chơi ngay
-</button>
+                return;
+              }
 
-  </div>
+              navigate("/minigame");
+            }}
+          >
+            🎮 Chơi ngay
+          </button>
 
-</div>
+        </div>
+
+      </div>
       {/* NEWS */}
       <div className="news-section">
 
@@ -244,6 +247,15 @@ export default function Home() {
         </div>
 
       </div>
+      {isFamily && (
+        <div
+          className="booking-food-btn"
+          onClick={() => navigate("/booking-food")}
+        >
+          <div className="burger-icon">🍔</div>
+          <span>Booking Food</span>
+        </div>
+      )}
 
       <footer className="copyright">
 

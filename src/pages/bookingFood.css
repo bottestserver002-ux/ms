@@ -1,0 +1,305 @@
+.booking-page {
+  min-height: 100vh;
+  padding: 40px;
+  background: #fff7ed;
+}
+
+.booking-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.booking-header h1 {
+  margin: 0;
+  color: #9a3412;
+}
+
+.booking-header p {
+  color: #7c2d12;
+}
+
+.cart-button {
+  padding: 12px 18px;
+  border: none;
+  border-radius: 999px;
+  background: #f97316;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.food-tabs {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+}
+
+.food-tabs button {
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid #fed7aa;
+  background: white;
+  color: #9a3412;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.food-tabs button.active {
+  background: #f97316;
+  color: white;
+}
+
+.admin-food-box {
+  background: white;
+  padding: 18px;
+  border-radius: 18px;
+  margin-bottom: 25px;
+  box-shadow: 0 10px 25px rgba(154, 52, 18, 0.12);
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.admin-food-box h3 {
+  width: 100%;
+  margin: 0 0 8px;
+  color: #153fc7;
+}
+
+.admin-food-box input,
+.admin-food-box select {
+  padding: 12px;
+  border: 1px solid #fed7aa;
+  border-radius: 12px;
+}
+
+.admin-food-box button {
+  padding: 12px 18px;
+  border: none;
+  border-radius: 12px;
+  background: #ea580c;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+input[type="file"] {
+  color: #e25518;
+  font-weight: 500;
+}
+
+.food-list {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+
+.food-card {
+  background: white;
+  border-radius: 18px;
+  padding: 12px;
+  box-shadow: 0 10px 25px rgba(154, 52, 18, 0.12);
+  text-align: center;
+}
+
+.food-img-wrap {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff7ed;
+  margin-bottom: 10px;
+}
+
+.food-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.food-img-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 42px;
+}
+
+.food-card h3 {
+  font-size: 16px;
+  margin: 8px 0 4px;
+  color: #153fc7;
+}
+
+.food-card p {
+  font-size: 13px;
+  margin: 0 0 10px;
+  color: #153fc7;
+}
+
+.food-actions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.food-actions button {
+  font-size: 13px;
+  padding: 8px 10px;
+}
+
+.cart-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  justify-content: flex-end;
+  z-index: 9999;
+}
+
+.cart-modal {
+  width: 420px;
+  max-width: 100%;
+  height: 100%;
+  background: white;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+.cart-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.close-cart {
+  border: none;
+  background: #fee2e2;
+  color: #dc2626;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.meal-time-box {
+  margin: 18px 0;
+  background: #fff7ed;
+  padding: 14px;
+  border-radius: 14px;
+}
+
+.meal-time-box select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #fed7aa;
+}
+
+.cart-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #fff7ed;
+  padding: 12px;
+  border-radius: 14px;
+}
+
+.cart-item h4 {
+  margin: 0;
+}
+
+.cart-item span {
+  color: #9a3412;
+  font-size: 14px;
+}
+
+.cart-item button {
+  margin-left: auto;
+  border: none;
+  background: #dc2626;
+  color: white;
+  border-radius: 8px;
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+.order-btn {
+  width: 100%;
+  margin-top: 20px;
+  padding: 14px;
+  border: none;
+  border-radius: 14px;
+  background: #9ca3af;
+  color: white;
+  font-weight: 800;
+  cursor: not-allowed;
+}
+
+.order-btn.active {
+  background: #16a34a;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .booking-page {
+    padding: 20px;
+  }
+
+  .booking-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .food-list {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 1200px) {
+  .food-list {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .food-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .food-list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .booking-page {
+    padding: 16px;
+  }
+
+  .food-card {
+    padding: 10px;
+  }
+
+  .food-card h3 {
+    font-size: 14px;
+  }
+
+  .food-actions button {
+    font-size: 12px;
+    padding: 7px 8px;
+  }
+}

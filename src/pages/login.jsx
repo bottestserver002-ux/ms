@@ -198,6 +198,11 @@ export default function Login() {
         );
 
         localStorage.setItem(
+          "is_family",
+          data.user.is_family
+        );
+
+        localStorage.setItem(
           "username",
           data.user.username
         );
