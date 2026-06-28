@@ -1,0 +1,328 @@
+.navbar {
+  width: 100%;
+  padding: 18px 24px;
+  background: #020817;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.navbar-inner {
+  position: relative;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 46px;
+}
+
+.nav-menu a {
+  position: relative;
+  color: #e5e7eb;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 26px 0 22px;
+}
+
+/* Chỉ link đang ở đúng trang mới có 2 gạch */
+.nav-menu a.active::before,
+.nav-menu a.active::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 46px;
+  height: 3px;
+  border-radius: 99px;
+  background: #2563eb;
+}
+
+.nav-menu a.active::before {
+  bottom: 8px;
+}
+
+.nav-menu a.active::after {
+  bottom: 0;
+}
+
+/* Không cho ADMIN dính vào Hỏi AI */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-left: 20px;
+  flex-shrink: 0;
+}
+
+.admin-text {
+  margin-left: 10px;
+  color: #22d3ee;
+  font-weight: 800;
+  font-size: 17px;
+  white-space: nowrap;
+}
+
+.admin-text {
+  color: #22d3ee;
+  font-weight: 800;
+  font-size: 17px;
+}
+
+.logout-btn,
+.login-link {
+  border: none;
+  text-decoration: none;
+  background: #2563eb;
+  color: white;
+  padding: 12px 22px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.avatar-box {
+  position: relative;
+}
+
+.avatar-img {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.online-dot {
+  position: absolute;
+  right: 1px;
+  bottom: 5px;
+  width: 13px;
+  height: 13px;
+  background: #22c55e;
+  border-radius: 50%;
+  border: 2px solid #07172b;
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 26px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 12px 10px;
+  }
+
+  .navbar-inner {
+    position: relative;
+    min-height: 72px;
+    padding: 0 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    font-size: 30px;
+    z-index: 10;
+  }
+
+  .logo-left {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+  }
+
+  .logo {
+    width: 62px;
+  }
+
+  .nav-right {
+    margin-left: auto;
+    width: 42px;
+    display: flex;
+    justify-content: flex-end;
+    z-index: 10;
+  }
+
+  .admin-text {
+    display: none;
+  }
+
+  .default-avatar {
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 15px !important;
+  }
+
+  .avatar-btn {
+    padding: 0;
+    margin: 0;
+  }
+
+  .online-dot {
+    width: 8px !important;
+    height: 8px !important;
+    right: -1px !important;
+    bottom: -1px !important;
+  }
+
+  .nav-menu {
+    position: absolute;
+    top: 78px;
+    left: 0;
+    right: 0;
+
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    padding: 16px;
+
+    background: rgba(6, 18, 36, 0.98);
+    border-radius: 0 0 20px 20px;
+    backdrop-filter: blur(20px);
+    z-index: 999;
+  }
+
+  .nav-menu.active {
+    display: flex;
+  }
+
+  .nav-menu a {
+    width: 100%;
+    text-align: left;
+    padding: 14px 18px;
+    font-size: 16px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .nav-menu a.active::before,
+  .nav-menu a.active::after {
+    display: none;
+  }
+
+  .nav-menu a.active {
+    border-left: 4px solid #2563eb;
+    padding-left: 14px;
+    background: rgba(37, 99, 235, 0.18);
+  }
+
+  .profile-menu {
+    width: 180px;
+    top: 48px;
+  }
+}
+
+.avatar-btn {
+  position: relative;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.default-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1e40af, #38bdf8);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 800;
+  border: 2px solid rgba(255, 255, 255, 0.18);
+}
+
+.online-dot {
+  position: absolute;
+  right: 2px;
+  bottom: 5px;
+  width: 13px;
+  height: 13px;
+  background: #22c55e;
+  border-radius: 50%;
+  border: 2px solid #07172b;
+}
+
+.profile-menu {
+  position: absolute;
+  top: 74px;
+  right: 0;
+  width: 210px;
+  background: #07172b;
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  border-radius: 14px;
+  padding: 10px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+  z-index: 1000;
+}
+
+.profile-menu a,
+.profile-menu button {
+  width: 100%;
+  display: block;
+  padding: 12px 14px;
+  border: none;
+  background: transparent;
+  color: #e5e7eb;
+  text-align: left;
+  text-decoration: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.profile-menu a:hover,
+.profile-menu button:hover {
+  background: rgba(37, 99, 235, 0.22);
+  color: white;
+}
+
+/* Chế độ sáng tạm thời */
+.light-mode {
+  background: #f5f7fb;
+  color: #111827;
+}
+
+.light-mode .navbar {
+  background: #f5f7fb;
+}
+
+.light-mode .navbar-inner {
+  background: #ffffff;
+  border-color: rgba(37, 99, 235, 0.2);
+}
+
+.light-mode .nav-menu a {
+  color: #111827;
+}
+
+.light-mode .profile-menu {
+  background: #ffffff;
+}
+
+.light-mode .profile-menu a,
+.light-mode .profile-menu button {
+  color: #111827;
+}
+
+.navbar-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}

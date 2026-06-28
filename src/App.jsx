@@ -9,6 +9,9 @@ import Supports from "./pages/supports";
 import PostDetail from "./pages/PostDetail";
 import MiniGame from "./pages/MiniGame";
 import BookingFood from "./pages/BookingFood";
+import Profile from "./pages/Profile";
+import UserProfile from "./pages/UserProfile";
+import AutoCaption from "./pages/AutoCaption";
 
 function App() {
   return (
@@ -21,6 +24,9 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/supports" element={<Supports />} />
         <Route path="/booking-food" element={<BookingFood />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/user-profile" element={<UserProfile />} />
+        <Route path="/auto-caption" element={<AutoCaption />} />
         <Route
           path="/minigame"
           element={<MiniGame />}

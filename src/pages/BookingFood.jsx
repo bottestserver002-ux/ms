@@ -26,6 +26,14 @@ export default function BookingFood() {
     const [imageFile, setImageFile] = useState(null);
     const [selectedIds, setSelectedIds] = useState([]);
     const [mealTime, setMealTime] = useState("Sáng");
+    const optimizeImage = (url) => {
+        if (!url) return "";
+
+        return url.replace(
+            "/upload/",
+            "/upload/c_fill,w_500,h_500,q_auto:good,f_auto,dpr_auto/"
+        );
+    };
 
     const [form, setForm] = useState({
         name: "",
@@ -213,9 +221,10 @@ export default function BookingFood() {
                         <div className="food-img-wrap">
                             {food.image ? (
                                 <img
-                                    src={`https://sm-backend-hbpp.onrender.com${food.image}`}
+                                    src={optimizeImage(food.image)}
                                     alt={food.name}
                                     className="food-img"
+                                    loading="lazy"
                                 />
                             ) : (
                                 <div className="food-img-placeholder">🍽️</div>

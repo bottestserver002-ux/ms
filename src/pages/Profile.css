@@ -1,0 +1,95 @@
+.profile-page {
+  max-width: 1200px;
+  margin: 50px auto;
+  padding: 40px;
+
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 60px;
+
+  background: rgba(8, 20, 40, 0.9);
+  border: 1px solid rgba(59, 130, 246, 0.15);
+  border-radius: 28px;
+
+  backdrop-filter: blur(20px);
+}
+
+.owner-image {
+  width: 100%;
+  border-radius: 24px;
+  object-fit: cover;
+
+  box-shadow:
+    0 20px 50px rgba(0,0,0,0.35),
+    0 0 40px rgba(59,130,246,0.18);
+}
+
+.profile-tag {
+  display: inline-block;
+  padding: 8px 18px;
+  border-radius: 999px;
+
+  background: rgba(34,211,238,0.15);
+  color: #67e8f9;
+
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.profile-right h1 {
+  font-size: 52px;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.profile-right h3 {
+  color: #94a3b8;
+  font-weight: 500;
+  margin-bottom: 30px;
+}
+
+.profile-right p {
+  color: #e2e8f0;
+  line-height: 1.9;
+  font-size: 17px;
+  margin-bottom: 20px;
+}
+
+.profile-quote {
+  margin-top: 40px;
+  padding: 30px;
+
+  border-left: 4px solid #22d3ee;
+  background: rgba(255,255,255,0.04);
+  border-radius: 18px;
+
+  display: flex;
+  gap: 20px;
+}
+
+.profile-quote span {
+  font-size: 40px;
+  color: #22d3ee;
+}
+
+.profile-quote p {
+  margin: 0;
+  font-style: italic;
+  color: #cbd5e1;
+}
+
+@media (max-width: 900px) {
+  .profile-page {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding: 24px;
+  }
+
+  .profile-right h1 {
+    font-size: 38px;
+  }
+
+  .profile-right p {
+    font-size: 16px;
+  }
+}

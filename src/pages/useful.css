@@ -1,0 +1,332 @@
+.useful-page {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top right, rgba(37, 99, 235, 0.25), transparent 35%),
+    linear-gradient(135deg, #020617, #0f2746);
+  color: white;
+}
+
+.useful-header {
+  text-align: center;
+  padding: 45px 20px 30px;
+  color: #111827;
+}
+
+.useful-header h1 {
+  color: #000000;
+}
+
+.useful-header p {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.add-post-btn {
+  margin-top: 20px;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 999px;
+  background: #340fd7;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.useful-grid {
+  max-width: 1180px;
+  margin: 20px auto 70px;
+  padding: 0 20px;
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 26px;
+}
+
+.useful-card {
+  background: white;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.12);
+  transition: 0.25s ease;
+}
+
+.useful-card:hover {
+  transform: translateY(-5px);
+}
+
+.useful-card-img {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+}
+
+.useful-card-body {
+  padding: 22px;
+}
+
+.useful-card-body h3 {
+  min-height: 76px;
+  font-size: 21px;
+  line-height: 1.35;
+  color: #000000;
+  margin-bottom: 14px;
+}
+
+.useful-card-body p {
+  height: 72px;
+  overflow: hidden;
+  font-size: 16px;
+  line-height: 1.55;
+  color: #000000;
+  margin-bottom: 22px;
+}
+
+.useful-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.useful-card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.read-more-btn {
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+.useful-admin-actions {
+  margin-top: 14px;
+}
+
+.read-more-btn {
+  border: none;
+  background: none;
+  color: #0e24ea;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+  text-transform: uppercase;
+}
+
+.useful-admin-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.useful-admin-actions button {
+  padding: 7px 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+}
+
+/* MODAL */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(8px);
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.post-modal {
+  width: 900px;
+  max-width: 94vw;
+  max-height: 92vh;
+  overflow-y: auto;
+
+  background: white;
+  border-radius: 20px;
+  padding: 28px;
+}
+
+.post-modal h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #000000;
+}
+
+.post-modal input {
+  width: 100%;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  font-size: 16px;
+}
+
+.post-editor {
+  background: white;
+}
+
+.post-editor .ql-container {
+  min-height: auto !important;
+}
+
+.post-editor .ql-editor {
+  min-height: 220px !important;
+  max-height: 420px;
+  overflow-y: auto;
+
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.post-modal-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.post-modal-actions button {
+  flex: 1;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.post-modal-actions button:first-child {
+  background: #dc2626;
+  color: white;
+}
+
+.post-modal-actions button:last-child {
+  background: #e5e7eb;
+  color: #111;
+}
+
+@media (max-width: 1024px) {
+  .useful-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .useful-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .useful-card-img {
+    height: 220px;
+  }
+}
+.ql-font-arial {
+  font-family: Arial, sans-serif;
+}
+
+.ql-font-times-new-roman {
+  font-family: "Times New Roman", serif;
+}
+
+.ql-font-roboto {
+  font-family: Roboto, sans-serif;
+}
+
+.ql-font-montserrat {
+  font-family: Montserrat, sans-serif;
+}
+
+.ql-font-georgia {
+  font-family: Georgia, serif;
+}
+
+.ql-font-courier-new {
+  font-family: "Courier New", monospace;
+}
+.ql-size-small {
+  font-size: 14px;
+}
+
+.ql-size-large {
+  font-size: 24px;
+}
+
+.ql-size-huge {
+  font-size: 36px;
+}
+/* FONT DROPDOWN */
+.ql-snow .ql-picker.ql-font {
+  width: 160px;
+}
+
+/* label đang chọn */
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="arial"]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="arial"]::before {
+  content: "Arial";
+  font-family: Arial, sans-serif;
+}
+
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="times-new-roman"]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="times-new-roman"]::before {
+  content: "Times New Roman";
+  font-family: "Times New Roman", serif;
+}
+
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="roboto"]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="roboto"]::before {
+  content: "Roboto";
+  font-family: Roboto, sans-serif;
+}
+
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="montserrat"]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="montserrat"]::before {
+  content: "Montserrat";
+  font-family: Montserrat, sans-serif;
+}
+
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="georgia"]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="georgia"]::before {
+  content: "Georgia";
+  font-family: Georgia, serif;
+}
+
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="courier-new"]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="courier-new"]::before {
+  content: "Courier New";
+  font-family: "Courier New", monospace;
+}
+.post-editor .ql-editor p {
+  margin: 0 0 10px;
+}
+
+.post-content .ql-editor p {
+  margin: 0 0 14px;
+}
+/* ===== HEADING MẶC ĐỊNH TRONG EDITOR ===== */
+
+.post-editor .ql-editor h1,
+.post-editor .ql-editor h2,
+.post-editor .ql-editor h3,
+.post-editor .ql-editor h4,
+.post-editor .ql-editor h5,
+.post-editor .ql-editor h6 {
+  color: #000 ;
+}
+
+/* In đậm cũng luôn màu đen */
+.post-editor .ql-editor strong {
+  color: #000 !important;
+}
+
+/* In nghiêng cũng luôn màu đen */
+.post-editor .ql-editor em {
+  color: #000 !important;
+}
+.post-editor .ql-editor {
+  color: #000;
+}
+
+.post-editor .ql-editor *:not([style*="color"]) {
+  color: inherit !important;
+}

@@ -1,0 +1,115 @@
+.user-profile-page {
+  max-width: 1000px;
+  margin: 50px auto;
+}
+
+.user-profile-card {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 40px;
+  padding: 40px;
+  border-radius: 28px;
+  background: rgba(8, 20, 40, 0.92);
+  border: 1px solid rgba(59, 130, 246, 0.18);
+}
+
+.avatar-area {
+  text-align: center;
+}
+
+.big-avatar {
+  width: 180px;
+  height: 180px;
+  margin: auto;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1e40af, #38bdf8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.big-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.big-avatar span {
+  color: white;
+  font-size: 64px;
+  font-weight: 900;
+}
+
+.profile-info h1 {
+  color: white;
+  margin-bottom: 26px;
+}
+
+.info-row {
+  margin-bottom: 18px;
+}
+
+.info-row label {
+  color: #67e8f9;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.info-row p {
+  margin: 0;
+  color: #e2e8f0;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.05);
+}
+
+.info-row input,
+.info-row select {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(59,130,246,0.25);
+  background: #07172b;
+  color: white;
+}
+
+.profile-actions {
+  margin-top: 28px;
+  display: flex;
+  gap: 12px;
+}
+
+.edit-profile-btn,
+.save-btn,
+.cancel-btn {
+  border: none;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.edit-profile-btn,
+.save-btn {
+  background: #2563eb;
+  color: white;
+}
+
+.cancel-btn {
+  background: rgba(255,255,255,0.08);
+  color: #e5e7eb;
+}
+
+@media (max-width: 768px) {
+  .user-profile-card {
+    grid-template-columns: 1fr;
+    padding: 24px;
+  }
+
+  .big-avatar {
+    width: 140px;
+    height: 140px;
+  }
+}

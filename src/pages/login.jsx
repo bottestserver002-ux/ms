@@ -192,6 +192,8 @@ export default function Login() {
           data.token
         );
 
+        localStorage.setItem("user_id", data.user.id);
+
         localStorage.setItem(
           "is_admin",
           data.user.is_admin
@@ -211,6 +213,7 @@ export default function Login() {
           "email",
           data.user.email
         );
+
 
         navigate("/");
       }

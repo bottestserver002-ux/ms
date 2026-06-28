@@ -118,68 +118,6 @@
     0 0 0 4px rgba(59,130,246,0.18);
 }
 
-/* =========================
-   QUILL EDITOR
-========================= */
-.useful-editor {
-  margin-top: 10px;
-}
-
-.useful-editor .ql-toolbar {
-  border-radius: 16px 16px 0 0;
-
-  border: 1px solid rgba(96,165,250,0.25);
-
-  background: rgba(15, 23, 42, 0.95);
-}
-
-.useful-editor .ql-container {
-  border-radius: 0 0 16px 16px;
-
-  border: 1px solid rgba(96,165,250,0.25);
-
-  background: rgba(15, 23, 42, 0.82);
-
-  color: white;
-
-  font-size: 16px;
-
-  min-height: 280px;
-
-  max-height: 450px;
-
-  overflow-y: auto;
-}
-
-/* chữ editor */
-.useful-editor .ql-editor {
-  color: white;
-
-  min-height: 280px;
-
-  line-height: 1.8;
-
-  font-size: 16px;
-}
-
-/* placeholder */
-.useful-editor .ql-editor.ql-blank::before {
-  color: rgba(255,255,255,0.4);
-  font-style: normal;
-}
-
-/* icon toolbar */
-.useful-editor .ql-stroke {
-  stroke: white !important;
-}
-
-.useful-editor .ql-fill {
-  fill: white !important;
-}
-
-.useful-editor .ql-picker {
-  color: white !important;
-}
 
 /* =========================
    BUTTONS
@@ -296,3 +234,4 @@
   outline: none;
   border-color: #4f8cff;
 }
+

@@ -1,46 +1,55 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
+import "./Navbar.css";
 
 export default function Navbar() {
-
   const navigate = useNavigate();
 
   const username = localStorage.getItem("username");
+  const isAdmin = localStorage.getItem("is_admin") === "true";
 
   const [openMenu, setOpenMenu] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [openProfile, setOpenProfile] = useState(false);
+  const [userAvatar, setUserAvatar] = useState(
+    localStorage.getItem("avatar")
+  );
+
   useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 30);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-  const handleScroll = () => {
+  useEffect(() => {
+    const updateAvatar = () => {
+      setUserAvatar(localStorage.getItem("avatar"));
+    };
 
-    if (window.scrollY > 30) {
-      setScrolled(true);
-    } else {
-      setScrolled(false);
-    }
-  };
+    window.addEventListener("storage", updateAvatar);
+    window.addEventListener("avatarUpdated", updateAvatar);
 
-  window.addEventListener("scroll", handleScroll);
-
-  return () => {
-    window.removeEventListener("scroll", handleScroll);
-  };
-
-}, []);
+    return () => {
+      window.removeEventListener("storage", updateAvatar);
+      window.removeEventListener("avatarUpdated", updateAvatar);
+    };
+  }, []);
 
   const handleLogout = () => {
     localStorage.clear();
     navigate("/login");
   };
 
+  const closeMenu = () => setOpenMenu(false);
+
   return (
     <nav className="navbar">
-
-      {/* NAVBAR CONTAINER */}
       <div className={`navbar-inner ${scrolled ? "scrolled" : ""}`}>
+        <div className="logo-left">
+          <img src={logo} alt="logo" className="logo" />
+        </div>
 
-        {/* MOBILE BUTTON */}
         <button
           className="menu-toggle"
           onClick={() => setOpenMenu(!openMenu)}
@@ -48,60 +57,61 @@ export default function Navbar() {
           ☰
         </button>
 
-        {/* LEFT MENU */}
-        <div className={`menu left-menu ${openMenu ? "active" : ""}`}>
-
-          <Link to="/">Trang chủ</Link>
-
-          <Link to="/collection">Sưu tập</Link>
-
-          <Link to="/useful">Bổ ích</Link>
-
+        <div className={`menu nav-menu ${openMenu ? "active" : ""}`}>
+          <NavLink to="/" end onClick={closeMenu}>Trang chủ</NavLink>
+          <NavLink to="/collection" onClick={closeMenu}>Sưu tập</NavLink>
+          <NavLink to="/useful" onClick={closeMenu}>Bổ ích</NavLink>
+          <NavLink to="/minigame" onClick={closeMenu}>Minigame</NavLink>
+          <NavLink to="/supports" onClick={closeMenu}>Hỏi AI</NavLink>
         </div>
 
-        {/* LOGO */}
-        <div className="logo-center">
-          <img
-            src={logo}
-            alt="logo"
-            className="logo"
-          />
-        </div>
+        <div className="nav-right">
+          {isAdmin && <span className="admin-text">ADMIN</span>}
 
-        {/* RIGHT MENU */}
-        <div className={`menu right-menu ${openMenu ? "active" : ""}`}>
-
-          <Link to="/contact">Liên hệ</Link>
-
-          <Link to="/supports">Hỏi AI</Link>
-
-          {
-            username ? (
-              <div className="auth-box">
-
-                <span className="hello-text">
-                  {username}
-                </span>
-
-                <button
-                  onClick={handleLogout}
-                  className="logout-btn"
-                >
-                  Đăng xuất
-                </button>
-
+          <div className="profile-wrapper">
+            <button
+              className="avatar-btn"
+              onClick={() => setOpenProfile(!openProfile)}
+            >
+              <div className="default-avatar">
+                {userAvatar ? (
+                  <img
+                    src={userAvatar}
+                    alt="avatar"
+                    className="navbar-avatar-img"
+                  />
+                ) : (
+                  username ? username.charAt(0).toUpperCase() : "U"
+                )}
               </div>
-            ) : (
-              <Link to="/login">
-                Đăng nhập
-              </Link>
-            )
-          }
 
+              <span className="online-dot"></span>
+            </button>
+
+            {openProfile && (
+              <div className="profile-menu">
+                <Link
+                  to="/user-profile"
+                  onClick={() => setOpenProfile(false)}
+                >
+                  Thông tin cá nhân
+                </Link>
+
+                {username ? (
+                  <button onClick={handleLogout}>Đăng xuất</button>
+                ) : (
+                  <Link
+                    to="/login"
+                    onClick={() => setOpenProfile(false)}
+                  >
+                    Đăng nhập
+                  </Link>
+                )}
+              </div>
+            )}
+          </div>
         </div>
-
       </div>
-
     </nav>
   );
 }

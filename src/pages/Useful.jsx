@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
-import { getPosts, addPost, deletePost, updatePost } from "../services/api";
+import {
+  getPosts,
+  addPost,
+  deletePost,
+  updatePost,
+} from "../services/api";
 import { useNavigate } from "react-router-dom";
-import ReactQuill from "react-quill";
+import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
-
-import "./modal.css";
+import "./Useful.css";
 
 export default function Useful() {
-    const navigate = useNavigate();
-
-  const isAdmin =
-    localStorage.getItem("is_admin") === "true";
+  const navigate = useNavigate();
+  const isAdmin = localStorage.getItem("is_admin") === "true";
 
   const [posts, setPosts] = useState([]);
-
   const [openForm, setOpenForm] = useState(false);
   const [editingId, setEditingId] = useState(null);
 
@@ -23,6 +24,40 @@ export default function Useful() {
     image: "",
     content: "",
   });
+  const Font = Quill.import("formats/font");
+
+  Font.whitelist = [
+    "arial",
+    "times-new-roman",
+    "roboto",
+    "montserrat",
+    "georgia",
+    "courier-new",
+  ];
+
+  Quill.register(Font, true);
+
+  const modules = {
+    toolbar: [
+      [{ font: Font.whitelist }],
+
+      [{ size: ["small", false, "large", "huge"] }],
+
+      [{ header: [1, 2, 3, false] }],
+
+      ["bold", "italic", "underline"],
+
+      [{ color: [] }, { background: [] }],
+
+      [{ align: [] }],
+
+      [{ list: "ordered" }, { list: "bullet" }],
+
+      ["link", "image"],
+
+      ["clean"],
+    ],
+  };
 
   useEffect(() => {
     fetchPosts();
@@ -33,6 +68,14 @@ export default function Useful() {
     setPosts(data);
   };
 
+  const cleanContent = (html) => {
+    return html
+      .replace(/<p><br><\/p>/g, "")
+      .replace(/<p><br\/><\/p>/g, "")
+      .replace(/<p>&nbsp;<\/p>/g, "")
+      .replace(/(<p>\s*<\/p>)/g, "");
+  };
+
   const handleChange = (e) => {
     setForm({
       ...form,
@@ -40,200 +83,144 @@ export default function Useful() {
     });
   };
 
-  const handleAdd = async () => {
+  const stripHtml = (html) => {
+    const div = document.createElement("div");
+    div.innerHTML = html || "";
+    return div.textContent || div.innerText || "";
+  };
 
-  if (editingId) {
+  const handleSave = async () => {
+    if (editingId) {
+      await updatePost(editingId, {
+        ...form,
+        content: cleanContent(form.content),
+      });
+    } else {
+      await addPost({
+        ...form,
+        content: cleanContent(form.content),
+      });
+    }
 
-    await updatePost(editingId, form);
+    setEditingId(null);
+    setOpenForm(false);
+    setForm({
+      title: "",
+      image: "",
+      content: "",
+    });
 
-  } else {
+    fetchPosts();
+  };
 
-    await addPost(form);
+  const handleEdit = (post) => {
+    setEditingId(post.id);
+    setForm({
+      title: post.title,
+      image: post.image,
+      content: post.content,
+    });
+    setOpenForm(true);
+  };
 
-  }
+  const handleDelete = async (id) => {
+    if (!window.confirm("Bạn muốn xóa bài này?")) return;
 
-  setEditingId(null);
+    await deletePost(id);
+    fetchPosts();
+  };
 
-  setOpenForm(false);
-
-  setForm({
-    title: "",
-    image: "",
-    content: "",
-  });
-
-  fetchPosts();
-};
-const handleDelete = async (id) => {
-
-  if (!window.confirm("Bạn muốn xóa bài này?")) return;
-
-  await deletePost(id);
-
-  fetchPosts();
-};
-
-const handleEdit = (post) => {
-
-  setEditingId(post.id);
-
-  setForm({
-    title: post.title,
-    image: post.image,
-    content: post.content,
-  });
-
-  setOpenForm(true);
-};
+  const openAddForm = () => {
+    setEditingId(null);
+    setForm({
+      title: "",
+      image: "",
+      content: "",
+    });
+    setOpenForm(true);
+  };
 
   return (
-    <div className="container">
-
+    <div className="useful-page">
       <Navbar />
 
-      {/* ADMIN BUTTON */}
-      {isAdmin && (
-        <button
-          className="filter-ok"
-          onClick={() => setOpenForm(true)}
-        >
-          + Thêm bài viết
-        </button>
-        
-        
-      )}
+      <div className="useful-header">
 
-      {/* MODAL */}
+        {isAdmin && (
+          <button className="add-post-btn" onClick={openAddForm}>
+            + Thêm bài viết
+          </button>
+        )}
+      </div>
+
+      <div className="useful-grid">
+        {posts.map((p) => (
+          <div className="useful-card" key={p.id}>
+            <img src={p.image} alt={p.title} className="useful-card-img" />
+
+            <div className="useful-card-body">
+              <h3>{p.title}</h3>
+
+              <p>{stripHtml(p.content).slice(0, 115)}...</p>
+
+              <button
+                className="read-more-btn"
+                onClick={() => navigate(`/post/${p.id}`)}
+              >
+                Xem thêm →
+              </button>
+
+              {isAdmin && (
+                <div className="useful-admin-actions">
+                  <button onClick={() => handleEdit(p)}>✏️ Sửa</button>
+                  <button onClick={() => handleDelete(p.id)}>❌ Xóa</button>
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+
       {openForm && (
-        <div
-          className="modal-overlay"
-          onClick={() => setOpenForm(false)}
-        >
-
-          <div
-            className="modal-card"
-            onClick={(e) => e.stopPropagation()}
-          >
-
-            <h2>✨ Thêm bài viết mới</h2>
+        <div className="modal-overlay" onClick={() => setOpenForm(false)}>
+          <div className="post-modal" onClick={(e) => e.stopPropagation()}>
+            <h2>{editingId ? "✏️ Sửa bài viết" : "✨ Thêm bài viết mới"}</h2>
 
             <input
               name="title"
               placeholder="Tiêu đề bài viết"
+              value={form.title}
               onChange={handleChange}
             />
 
             <input
               name="image"
-              placeholder="Link hình ảnh"
+              placeholder="Link hình ảnh bìa"
+              value={form.image}
               onChange={handleChange}
             />
 
-           <ReactQuill
-  theme="snow"
-  value={form.content}
-  onChange={(value) =>
-    setForm({
-      ...form,
-      content: value,
-    })
-  }
-  placeholder="Nội dung..."
-  className="useful-editor"
-/>
+            <ReactQuill
+              theme="snow"
+              value={form.content}
+              modules={modules}
+              onChange={(value) =>
+                setForm({
+                  ...form,
+                  content: value,
+                })
+              }
+              className="post-editor"
+              placeholder="Nội dung bài viết..."
+            />
 
-            <div className="modal-actions">
-
-              <button onClick={handleAdd}>
-                💾 Đăng bài
-              </button>
-
-              <button
-                onClick={() => setOpenForm(false)}
-              >
-                ❌ Huỷ
-              </button>
-
+            <div className="post-modal-actions">
+              <button onClick={handleSave}>💾 Lưu bài</button>
+              <button onClick={() => setOpenForm(false)}>❌ Hủy</button>
             </div>
-
           </div>
-
         </div>
       )}
-
-      {/* LIST POSTS */}
-<div className="posts-grid">
-
-  {posts.map((p) => (
-
-    <div
-      key={p.id}
-      className="news-post-card"
-    >
-
-      <img
-        src={p.image}
-        alt={p.title}
-        className="news-post-image"
-      />
-
-      <div className="news-post-content">
-
-        <h3>
-          {p.title}
-        </h3>
-
-        <div
-  className="useful-content"
-  dangerouslySetInnerHTML={{
-    __html: p.content.slice(0, 160) + "...",
-  }}
-/>
-
-        <button
-  className="detail-btn"
-  onClick={() => navigate(`/post/${p.id}`)}
->
-  Xem chi tiết
-</button>
-
-
-        {/* ADMIN BUTTONS */}
-        {isAdmin && (
-
-          <div style={{ marginTop: 12 }}>
-
-            <button
-              className="edit-btn"
-              onClick={() => handleEdit(p)}
-            >
-              ✏️ Sửa
-            </button>
-
-            <button
-              className="delete-btn"
-              onClick={() => handleDelete(p.id)}
-            >
-              ❌ Xóa
-            </button>
-
-          </div>
-
-        )}
-
-      </div>
-
-    </div>
-
- 
-
-
-
-
-        ))}
-
-      </div>
-
     </div>
   );
 }
