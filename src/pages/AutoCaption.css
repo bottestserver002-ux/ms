@@ -28,7 +28,7 @@
 
 .auto-caption-layout {
   display: grid;
-  grid-template-columns: 420px 1fr;
+  grid-template-columns: 420px minmax(0, 1fr);
   gap: 28px;
 }
 
@@ -218,4 +218,241 @@
 
 .markdown-content p {
   margin-bottom: 16px;
+}
+
+.select-topic-label {
+  display: block;
+  color: #67e8f9;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.select-topic-box {
+  width: 100%;
+  padding: 13px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  background: #07172b;
+  color: white;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.generate-post-btn {
+  width: 100%;
+  padding: 14px 18px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #2563eb, #22d3ee);
+  color: white;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.generate-post-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+.post-length-group {
+  margin-top: 24px;
+}
+
+.post-length-group label {
+  display: block;
+
+  margin-bottom: 10px;
+
+  color: #66e3ff;
+
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.post-length-group select {
+  width: 100%;
+
+  height: 54px;
+
+  padding: 0 18px;
+
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 14px;
+
+  background: rgba(8, 20, 42, 0.9);
+
+  color: #fff;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  outline: none;
+
+  transition: 0.25s;
+}
+
+.post-length-group select:hover {
+  border-color: rgba(56, 189, 248, 0.45);
+}
+
+.post-length-group select:focus {
+  border-color: #38bdf8;
+
+  box-shadow:
+    0 0 0 4px rgba(56, 189, 248, 0.15);
+}
+.generate-blog-box {
+  margin-top: 28px;
+
+  padding: 22px;
+
+  border-radius: 18px;
+
+  background:
+    rgba(255,255,255,0.03);
+
+  border:
+    1px solid
+    rgba(255,255,255,0.08);
+}
+
+.generate-blog-box h3 {
+  margin-bottom: 18px;
+
+  color: #5ce1ff;
+}
+
+.generate-blog-box button {
+  width: 100%;
+
+  height: 52px;
+
+  border: none;
+
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #0ea5e9,
+      #2563eb
+    );
+
+  color: white;
+
+  font-size: 16px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.blog-result-card {
+  margin-top: 20px;
+
+  padding: 30px;
+
+  border-radius: 20px;
+
+  background:
+    rgba(8,20,42,0.95);
+
+  border:
+    1px solid
+    rgba(255,255,255,0.06);
+}
+.generate-tiktok-box {
+  margin-top: 24px;
+
+  padding: 24px;
+
+  border-radius: 20px;
+
+  background:
+    rgba(255,255,255,0.03);
+
+  border:
+    1px solid rgba(255,255,255,0.08);
+}
+
+.generate-tiktok-box h3 {
+  color: #5ce1ff;
+
+  margin-bottom: 18px;
+}
+
+.generate-tiktok-box button {
+  width: 100%;
+
+  height: 52px;
+
+  border: none;
+
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #ff0050,
+      #00f2ea
+    );
+
+  color: white;
+
+  font-size: 16px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.tiktok-result-card {
+  margin-top: 20px;
+
+  padding: 30px;
+
+  border-radius: 20px;
+
+  background:
+    rgba(8,20,42,0.95);
+
+  border:
+    1px solid rgba(255,255,255,0.06);
+}
+
+/* Chặn nội dung AI kéo rộng layout */
+.caption-result-card,
+.result-block,
+.blog-result-card,
+.tiktok-result-card,
+.markdown-content {
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
+}
+
+.markdown-content {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.markdown-content pre,
+.markdown-content code {
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+/* Cho Blog/TikTok cùng kiểu với Facebook result */
+.blog-result-card,
+.tiktok-result-card {
+  margin-bottom: 26px;
+  padding: 22px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.blog-result-card h2,
+.tiktok-result-card h2 {
+  color: #22d3ee;
+  margin-bottom: 14px;
 }

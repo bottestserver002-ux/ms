@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
-import "./AutoCaption.css";
 import ReactMarkdown from "react-markdown";
+import "./AutoCaption.css";
 
 export default function AutoCaption() {
     const API = "https://sm-backend-hbpp.onrender.com";
@@ -12,11 +12,125 @@ export default function AutoCaption() {
         goal: "Tăng tương tác",
         tone: "Thân thiện",
         length: "Trung bình",
+        // mới
+        postLength: "Tự động",
     });
+    const [tiktokLoading, setTiktokLoading] =
+        useState(false);
+
+    const [tiktokResult, setTiktokResult] =
+        useState("");
+
+    const [blogLoading, setBlogLoading] = useState(false);
+    const [blogResult, setBlogResult] = useState("");
+
+    const generateTikTok = async () => {
+
+        if (!selectedIdea) {
+            alert("Vui lòng chọn chủ đề!");
+            return;
+        }
+
+        setTiktokLoading(true);
+
+        try {
+
+            const res = await fetch(
+                `${API}/generate-tiktok`,
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json",
+                    },
+
+                    body: JSON.stringify({
+                        main_subject: form.topic,
+
+                        selected_idea_number:
+                            selectedIdea,
+
+                        ideas_text:
+                            result.aiText,
+
+                        tone:
+                            form.tone,
+                    }),
+                }
+            );
+
+            const data =
+                await res.json();
+
+            setTiktokResult(
+                data.result
+            );
+
+        } catch (err) {
+
+            alert(err.message);
+
+        } finally {
+
+            setTiktokLoading(false);
+        }
+    };
+
+    const generateBlog = async () => {
+        if (!selectedIdea) {
+            alert("Vui lòng chọn chủ đề!");
+            return;
+        }
+
+        setBlogLoading(true);
+
+        try {
+            const res = await fetch(
+                `${API}/generate-blog`,
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+
+                    body: JSON.stringify({
+                        main_subject: form.topic,
+
+                        selected_idea_number: selectedIdea,
+
+                        ideas_text: result.aiText,
+
+                        tone: form.tone,
+
+                        length: form.length,
+                    }),
+                }
+            );
+
+            const data = await res.json();
+
+            setBlogResult(data.result);
+
+        } catch (err) {
+
+            alert(err.message);
+
+        } finally {
+
+            setBlogLoading(false);
+        }
+    };
 
     const [loading, setLoading] = useState(false);
+    const [postLoading, setPostLoading] = useState(false);
+
     const [result, setResult] = useState(null);
     const [research, setResearch] = useState(null);
+
+    const [selectedIdea, setSelectedIdea] = useState("");
+    const [postResult, setPostResult] = useState(null);
 
     const handleChange = (e) => {
         setForm({
@@ -33,6 +147,8 @@ export default function AutoCaption() {
 
         setLoading(true);
         setResult(null);
+        setPostResult(null);
+        setSelectedIdea("");
 
         let researchData = {
             google_suggest: [],
@@ -83,10 +199,64 @@ export default function AutoCaption() {
         setLoading(false);
     };
 
-    const copyResult = () => {
-        if (!result?.aiText) return;
+    const generateFacebookPost = async () => {
+        if (!selectedIdea) {
+            alert("Vui lòng chọn một chủ đề từ 1 đến 20!");
+            return;
+        }
 
-        navigator.clipboard.writeText(result.aiText);
+        if (!result?.aiText) {
+            alert("Bạn cần tạo 20 chủ đề trước!");
+            return;
+        }
+
+        setPostLoading(true);
+        setPostResult(null);
+
+        try {
+            const res = await fetch(`${API}/generate-post`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    main_subject: form.topic,
+                    selected_idea_number: selectedIdea,
+                    ideas_text: result.aiText,
+                    tone: form.tone,
+                    platform: form.platform,
+                    goal: form.goal,
+                    post_length: form.postLength,
+                }),
+            });
+
+            const data = await res.json();
+
+            if (!res.ok) {
+                alert(data.detail || "Tạo bài viết thất bại!");
+                setPostLoading(false);
+                return;
+            }
+
+            setPostResult(data.result || "Không có nội dung trả về.");
+        } catch (error) {
+            console.log("Generate post error:", error);
+            alert("Lỗi kết nối AI khi tạo Facebook Post!");
+        }
+
+        setPostLoading(false);
+    };
+
+    const copyResult = () => {
+        if (!result?.aiText && !postResult) return;
+
+        const text = `
+${result?.aiText || ""}
+
+${postResult ? "\n\nFACEBOOK POST ĐÃ TẠO:\n" + postResult : ""}
+    `.trim();
+
+        navigator.clipboard.writeText(text);
         alert("Đã copy nội dung!");
     };
 
@@ -102,6 +272,8 @@ export default function AutoCaption() {
             form,
             result,
             research,
+            selectedIdea,
+            postResult,
             createdAt: new Date().toLocaleString("vi-VN"),
         });
 
@@ -120,8 +292,8 @@ export default function AutoCaption() {
                     <h1>Auto Caption</h1>
 
                     <p>
-                        Công cụ hỗ trợ tạo ý tưởng nội dung, caption viral,
-                        bài viết chuyên nghiệp, hook mở đầu và hashtag nhanh chóng.
+                        Công cụ hỗ trợ phân tích insight, tạo 20 ý tưởng chủ đề viral,
+                        sau đó chọn một chủ đề để viết Facebook Post và gợi ý hình ảnh.
                     </p>
                 </div>
 
@@ -191,15 +363,15 @@ export default function AutoCaption() {
                             onClick={createContent}
                             disabled={loading}
                         >
-                            {loading ? "Đang tạo nội dung..." : "✨ Tạo nội dung"}
+                            {loading ? "Đang tạo 20 chủ đề..." : "✨ Tạo nội dung"}
                         </button>
 
                         <div className="tool-types">
-                            <span>✨ Gợi ý chủ đề</span>
-                            <span>🔥 Caption Viral</span>
-                            <span>📝 Bài viết SEO</span>
-                            <span>🎬 Ý tưởng video/Reel</span>
+                            <span>💡 Insight khách hàng</span>
+                            <span>🔥 20 chủ đề viral</span>
                             <span>📈 Nghiên cứu từ khóa</span>
+                            <span>📝 Facebook Post</span>
+                            <span>🖼️ Gợi ý hình ảnh</span>
                             <span>#️⃣ Hashtag</span>
                         </div>
                     </div>
@@ -210,15 +382,14 @@ export default function AutoCaption() {
                                 <h2>Kết quả sẽ hiển thị tại đây</h2>
 
                                 <p>
-                                    Nhập chủ đề và bấm tạo nội dung để nhận gợi ý.
+                                    Nhập chủ đề và bấm tạo nội dung để nhận insight
+                                    cùng 20 ý tưởng chủ đề.
                                 </p>
                             </div>
                         ) : (
                             <>
                                 <div className="result-actions">
-                                    <button onClick={copyResult}>
-                                        📋 Copy
-                                    </button>
+                                    <button onClick={copyResult}>📋 Copy</button>
 
                                     <button onClick={saveToLibrary}>
                                         💾 Lưu vào thư viện
@@ -244,23 +415,11 @@ export default function AutoCaption() {
                                         ) : (
                                             <p>Chưa có dữ liệu Google Suggest.</p>
                                         )}
-
-                                        <h4>Google Trends</h4>
-
-                                        {research.google_trends?.length > 0 ? (
-                                            <ul>
-                                                {research.google_trends.map((item, index) => (
-                                                    <li key={index}>{item}</li>
-                                                ))}
-                                            </ul>
-                                        ) : (
-                                            <p>Chưa có dữ liệu Google Trends.</p>
-                                        )}
                                     </div>
                                 )}
 
                                 <div className="result-block">
-                                    <h3>✨ Nội dung AI đề xuất</h3>
+                                    <h3>✨ Insight & 20 ý tưởng chủ đề</h3>
 
                                     <div className="markdown-content">
                                         <ReactMarkdown>
@@ -268,6 +427,173 @@ export default function AutoCaption() {
                                         </ReactMarkdown>
                                     </div>
                                 </div>
+
+                                <label className="select-topic-label">
+                                    Chọn chủ đề từ 1 đến 20
+                                </label>
+
+                                <select
+                                    className="select-topic-box"
+                                    value={selectedIdea}
+                                    onChange={(e) => setSelectedIdea(e.target.value)}
+                                >
+                                    <option value="">-- Chọn chủ đề --</option>
+
+                                    {Array.from({ length: 20 }, (_, i) => (
+                                        <option key={i + 1} value={i + 1}>
+                                            Chủ đề {i + 1}
+                                        </option>
+                                    ))}
+                                </select>
+                                {/* FACEBOOK POST */}
+                                <div className="result-block">
+                                    <h3>📝 Tạo Facebook Post từ chủ đề đã chọn</h3>
+
+
+                                    <div className="post-length-group">
+                                        <label>Độ dài Facebook Post</label>
+
+                                        <select
+                                            name="postLength"
+                                            value={form.postLength}
+                                            onChange={handleChange}
+                                        >
+                                            <option value="Tự động">
+                                                🔥 Tự động tối ưu theo nền tảng
+                                            </option>
+
+                                            <option value="Rất ngắn">
+                                                ⚡ Rất ngắn (80-150 từ)
+                                            </option>
+
+                                            <option value="Ngắn">
+                                                ✍️ Ngắn (150-300 từ)
+                                            </option>
+
+                                            <option value="Trung bình">
+                                                📝 Trung bình (300-600 từ)
+                                            </option>
+
+                                            <option value="Dài">
+                                                📖 Dài (600-1000 từ)
+                                            </option>
+
+                                            <option value="SEO">
+                                                🔍 Chuẩn SEO (1000-1500 từ)
+                                            </option>
+                                        </select>
+                                    </div>
+
+                                    <button
+                                        className="generate-post-btn"
+                                        onClick={generateFacebookPost}
+                                        disabled={postLoading}
+                                    >
+                                        {postLoading
+                                            ? "Đang tạo Facebook Post..."
+                                            : "✨ Tạo Facebook Post"}
+                                    </button>
+                                </div>
+                                {/* BLOG SEO WEBSITE */}
+                                <div className="generate-blog-box">
+                                    <h3>
+                                        🌐 Tạo Blog SEO Website từ chủ đề đã chọn
+                                    </h3>
+
+                                    <p>
+                                        Tự động sinh:
+                                    </p>
+
+                                    <ul>
+                                        <li>✅ Tiêu đề SEO</li>
+                                        <li>✅ Meta Description</li>
+                                        <li>✅ URL Slug</li>
+                                        <li>✅ Từ khóa chính & phụ</li>
+                                        <li>✅ Search Intent</li>
+                                        <li>✅ Internal Link</li>
+                                        <li>✅ FAQ Schema</li>
+                                        <li>✅ Gợi ý hình ảnh</li>
+                                        <li>✅ Bài viết 1200–1800 từ</li>
+                                    </ul>
+
+                                    <button
+                                        onClick={generateBlog}
+                                        disabled={blogLoading}
+                                    >
+                                        {
+                                            blogLoading
+                                                ? "Đang tạo..."
+                                                : "🌐 Tạo Blog SEO"
+                                        }
+                                    </button>
+                                </div>
+                                {/* TIKTOK */}
+                                <div className="generate-tiktok-box">
+                                    <h3>🎬 Tạo Post TikTok Viral</h3>
+
+                                    <button
+                                        onClick={generateTikTok}
+                                        disabled={tiktokLoading}
+                                    >
+                                        {tiktokLoading
+                                            ? "Đang tạo..."
+                                            : "🎬 Tạo TikTok Viral"}
+                                    </button>
+                                </div>
+
+
+                                {postResult && (
+                                    <div className="result-block">
+                                        <h3>📌 Facebook Post & gợi ý hình ảnh</h3>
+
+                                        <div className="markdown-content">
+                                            <ReactMarkdown>
+                                                {postResult}
+                                            </ReactMarkdown>
+                                        </div>
+                                    </div>
+                                )}
+
+
+                                {
+                                    blogResult && (
+
+                                        <div className="blog-result-card">
+
+                                            <h2>
+                                                🌐 Blog SEO Website
+                                            </h2>
+
+                                            <div className="markdown-content">
+                                                <ReactMarkdown>
+                                                    {blogResult}
+                                                </ReactMarkdown>
+                                            </div>
+                                        </div>
+
+                                    )
+
+                                }
+                                {
+                                    tiktokResult && (
+
+                                        <div className="tiktok-result-card">
+
+                                            <h2>
+                                                🎬 TikTok Viral
+                                            </h2>
+
+                                            <div className="markdown-content">
+                                                <ReactMarkdown>
+                                                    {tiktokResult}
+                                                </ReactMarkdown>
+                                            </div>
+
+                                        </div>
+
+                                    )
+                                }
+
                             </>
                         )}
                     </div>

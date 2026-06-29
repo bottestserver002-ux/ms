@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./bookingFood.css";
 import {
     getFoods,
@@ -46,6 +46,8 @@ export default function BookingFood() {
         const data = await getFoods();
         setFoods(data);
     };
+    const cartRef = useRef(null);
+    const [flyItem, setFlyItem] = useState(null);
 
     useEffect(() => {
         loadFoods();
@@ -55,7 +57,7 @@ export default function BookingFood() {
         .filter((item) => item.category === category)
         .sort((a, b) => a.name.localeCompare(b.name, "vi"));
 
-    const addToCart = (food) => {
+    const addToCart = (food, e) => {
         const exists = cart.find((item) => item.id === food.id);
 
         if (exists) {
@@ -63,7 +65,32 @@ export default function BookingFood() {
             return;
         }
 
-        setCart([...cart, food]);
+        const imgEl = e.currentTarget
+            .closest(".food-card")
+            .querySelector(".food-img");
+
+        const cartEl = cartRef.current;
+
+        if (imgEl && cartEl) {
+            const imgRect = imgEl.getBoundingClientRect();
+            const cartRect = cartEl.getBoundingClientRect();
+
+            setFlyItem({
+                image: food.image ? optimizeImage(food.image) : null,
+                name: food.name,
+                startX: imgRect.left,
+                startY: imgRect.top,
+                endX: cartRect.left + cartRect.width / 2,
+                endY: cartRect.top + cartRect.height / 2,
+            });
+
+            setTimeout(() => {
+                setFlyItem(null);
+                setCart([...cart, food]);
+            }, 750);
+        } else {
+            setCart([...cart, food]);
+        }
     };
 
     const removeFromCart = (id) => {
@@ -156,6 +183,7 @@ export default function BookingFood() {
                 </div>
 
                 <button
+                    ref={cartRef}
                     className="cart-button"
                     onClick={() => setShowCart(true)}
                 >
@@ -235,7 +263,7 @@ export default function BookingFood() {
                         <p>{food.category}</p>
 
                         <div className="food-actions">
-                            <button onClick={() => addToCart(food)}>
+                            <button onClick={(e) => addToCart(food, e)}>
                                 Thêm vào giỏ
                             </button>
 
@@ -260,6 +288,23 @@ export default function BookingFood() {
                     </div>
                 ))}
             </div>
+            {flyItem && (
+                <div
+                    className="fly-food"
+                    style={{
+                        left: flyItem.startX,
+                        top: flyItem.startY,
+                        "--end-x": `${flyItem.endX - flyItem.startX}px`,
+                        "--end-y": `${flyItem.endY - flyItem.startY}px`,
+                    }}
+                >
+                    {flyItem.image ? (
+                        <img src={flyItem.image} alt={flyItem.name} />
+                    ) : (
+                        <span>🍽️</span>
+                    )}
+                </div>
+            )}
 
             {showCart && (
                 <div className="cart-overlay">

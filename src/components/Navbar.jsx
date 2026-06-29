@@ -17,6 +17,26 @@ export default function Navbar() {
   );
 
   useEffect(() => {
+    const syncAvatar = () => {
+      setAvatar(
+        localStorage.getItem("avatar")
+      );
+    };
+
+    window.addEventListener(
+      "storage",
+      syncAvatar
+    );
+
+    return () => {
+      window.removeEventListener(
+        "storage",
+        syncAvatar
+      );
+    };
+  }, []);
+
+  useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 30);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);

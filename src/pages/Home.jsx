@@ -218,9 +218,6 @@ export default function Home() {
               📝 Auto Caption
             </button>
 
-            <button onClick={() => navigate("/planner")}>
-              📅 Planner
-            </button>
           </div>
         )}
 

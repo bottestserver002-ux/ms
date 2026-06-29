@@ -1,7 +1,7 @@
 .booking-page {
   min-height: 100vh;
   padding: 40px;
-  background: #fff7ed;
+  background: #b4d8fa;
 }
 
 .booking-header {
@@ -13,7 +13,7 @@
 
 .booking-header h1 {
   margin: 0;
-  color: #9a3412;
+  color: #172df5;
 }
 
 .booking-header p {
@@ -24,7 +24,7 @@
   padding: 12px 18px;
   border: none;
   border-radius: 999px;
-  background: #f97316;
+  background: #3041fd;
   color: white;
   font-weight: 700;
   cursor: pointer;
@@ -48,7 +48,7 @@
 }
 
 .food-tabs button.active {
-  background: #f97316;
+  background: #1638f9;
   color: white;
 }
 
@@ -73,7 +73,7 @@
 .admin-food-box input,
 .admin-food-box select {
   padding: 12px;
-  border: 1px solid #fed7aa;
+  border: 1px solid #1a1ace;
   border-radius: 12px;
 }
 
@@ -81,14 +81,14 @@
   padding: 12px 18px;
   border: none;
   border-radius: 12px;
-  background: #ea580c;
+  background: #0c40ea;
   color: white;
   font-weight: 700;
   cursor: pointer;
 }
 
 input[type="file"] {
-  color: #e25518;
+  color: #0c40ea;
   font-weight: 500;
 }
 
@@ -199,7 +199,7 @@ input[type="file"] {
   width: 100%;
   padding: 12px;
   border-radius: 12px;
-  border: 1px solid #fed7aa;
+  border: 1px solid #2e21dd;
 }
 
 .cart-list {
@@ -222,14 +222,14 @@ input[type="file"] {
 }
 
 .cart-item span {
-  color: #9a3412;
+  color: #2b129a;
   font-size: 14px;
 }
 
 .cart-item button {
   margin-left: auto;
   border: none;
-  background: #dc2626;
+  background: #0c40ea;
   color: white;
   border-radius: 8px;
   padding: 8px 10px;
@@ -301,5 +301,53 @@ input[type="file"] {
   .food-actions button {
     font-size: 12px;
     padding: 7px 8px;
+  }
+}
+
+.fly-food {
+  position: fixed;
+  width: 72px;
+  height: 72px;
+  z-index: 9999;
+  pointer-events: none;
+  border-radius: 18px;
+  overflow: hidden;
+  animation: flyToCart 0.75s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.35);
+}
+
+.fly-food img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.fly-food span {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 38px;
+  background: white;
+}
+
+@keyframes flyToCart {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+
+  55% {
+    opacity: 0.95;
+    transform: translate(
+      calc(var(--end-x) * 0.55),
+      calc(var(--end-y) * 0.25 - 80px)
+    ) scale(0.82) rotate(12deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(var(--end-x), var(--end-y)) scale(0.25) rotate(25deg);
   }
 }

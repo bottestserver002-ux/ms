@@ -213,7 +213,25 @@ export default function Login() {
           "email",
           data.user.email
         );
+        localStorage.setItem(
+          "avatar",
+          data.user.avatar || ""
+        );
 
+        localStorage.setItem(
+          "birthday",
+          data.user.birthday || ""
+        );
+
+        localStorage.setItem(
+          "job",
+          data.user.job || ""
+        );
+
+        localStorage.setItem(
+          "gender",
+          data.user.gender || ""
+        );
 
         navigate("/");
       }
