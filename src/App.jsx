@@ -12,6 +12,9 @@ import BookingFood from "./pages/BookingFood";
 import Profile from "./pages/Profile";
 import UserProfile from "./pages/UserProfile";
 import AutoCaption from "./pages/AutoCaption";
+import MiniGameHome from "./pages/MiniGameHome";
+import Game2048 from "./pages/Game2048";
+import PuzzleGame from "./pages/PuzzleGame";
 
 function App() {
   return (
@@ -29,12 +32,15 @@ function App() {
         <Route path="/auto-caption" element={<AutoCaption />} />
         <Route
           path="/minigame"
-          element={<MiniGame />}
+          element={<MiniGameHome />}
         />
+        <Route path="/minigame/duoi-hinh-bat-chu" element={<MiniGame />} />
         <Route
           path="/post/:id"
           element={<PostDetail />}
         />
+        <Route path="/minigame/2048" element={<Game2048 />} />
+        <Route path="/minigame/ghep-anh" element={<PuzzleGame />} />
       </Routes>
     </BrowserRouter>
   );

@@ -22,6 +22,15 @@ export default function MiniGame() {
 
   const navigate = useNavigate();
 
+  const optimizeImage = (url) => {
+    if (!url) return "";
+
+    return url.replace(
+      "/upload/",
+      "/upload/c_fill,w_500,h_500,q_auto:good,f_auto,dpr_auto/"
+    );
+  };
+
   const isAdmin =
     localStorage.getItem("is_admin") === "true";
 
@@ -170,7 +179,7 @@ export default function MiniGame() {
               >
 
                 <img
-                  src={q.image}
+                  src={optimizeImage(q.image)}
                   alt=""
                   style={{
                     width: 120,
@@ -312,7 +321,7 @@ export default function MiniGame() {
         </h1>
 
         <img
-          src={q.image}
+          src={optimizeImage(q.image)}
           alt=""
           className="game-image"
         />

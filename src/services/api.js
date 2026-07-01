@@ -290,3 +290,39 @@ export const orderFood = async (data) => {
 
   return res.json();
 };
+
+export const getPuzzleLevels = async (email = "") => {
+  const res = await fetch(
+    `${API}/puzzle/levels?email=${encodeURIComponent(email)}`
+  );
+  return res.json();
+};
+
+export const uploadPuzzleLevel = async (level, image) => {
+  const formData = new FormData();
+
+  formData.append("level", level);
+  formData.append("image", image);
+
+  const res = await fetch(`${API}/puzzle/level`, {
+    method: "POST",
+    body: formData,
+  });
+
+  return res.json();
+};
+
+export const completePuzzleLevel = async (email, level) => {
+  const res = await fetch(`${API}/puzzle/complete`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email,
+      level,
+    }),
+  });
+
+  return res.json();
+};

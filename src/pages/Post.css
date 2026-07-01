@@ -195,3 +195,13 @@
 .post-content .ql-editor h6 * {
   color: #000 ;
 }
+
+.post-content .ql-editor li {
+  font-weight: 400;
+  line-height: 1.8;
+}
+
+.post-content .ql-editor li strong,
+.post-content .ql-editor li b {
+  font-weight: 600 !important;
+}

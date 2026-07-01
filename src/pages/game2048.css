@@ -1,0 +1,178 @@
+.game2048-page {
+  max-width: 520px;
+  margin: 45px auto;
+  text-align: center;
+}
+
+.game2048-header span {
+  color: #22d3ee;
+  font-weight: 900;
+}
+
+.game2048-header h1 {
+  color: white;
+  font-size: 56px;
+  margin: 10px 0;
+}
+
+.game2048-header p {
+  color: #cbd5e1;
+  margin-bottom: 28px;
+}
+
+.game2048-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.score-box {
+  background: rgba(8, 20, 40, 0.95);
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  padding: 12px 22px;
+  border-radius: 16px;
+  color: white;
+}
+
+.score-box span {
+  display: block;
+  font-size: 13px;
+  color: #94a3b8;
+}
+
+.score-box strong {
+  font-size: 24px;
+  color: #22d3ee;
+}
+
+.game2048-top button {
+  border: none;
+  padding: 13px 18px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #2563eb, #22d3ee);
+  color: white;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.board2048 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+
+  background: rgba(8, 20, 40, 0.95);
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  padding: 14px;
+  border-radius: 24px;
+}
+
+.tile {
+  aspect-ratio: 1 / 1;
+  border-radius: 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+
+  font-size: 30px;
+  font-weight: 900;
+}
+
+.tile-2 {
+  background: #dbeafe;
+  color: #1e3a8a;
+}
+
+.tile-4 {
+  background: #bfdbfe;
+  color: #1e3a8a;
+}
+
+.tile-8 {
+  background: #38bdf8;
+}
+
+.tile-16 {
+  background: #0ea5e9;
+}
+
+.tile-32 {
+  background: #2563eb;
+}
+
+.tile-64 {
+  background: #1d4ed8;
+}
+
+.tile-128 {
+  background: #7c3aed;
+}
+
+.tile-256 {
+  background: #9333ea;
+}
+
+.tile-512 {
+  background: #db2777;
+}
+
+.tile-1024 {
+  background: #f97316;
+}
+
+.tile-2048 {
+  background: #facc15;
+  color: #111827;
+}
+
+.mobile-controls {
+  margin-top: 24px;
+}
+
+.mobile-controls button {
+  width: 64px;
+  height: 52px;
+  margin: 5px;
+  border: none;
+  border-radius: 14px;
+  background: rgba(37, 99, 235, 0.9);
+  color: white;
+  font-size: 22px;
+  font-weight: 900;
+}
+
+@media (max-width: 600px) {
+  .game2048-page {
+    padding: 0 16px;
+  }
+
+  .game2048-header h1 {
+    font-size: 42px;
+  }
+
+  .tile {
+    font-size: 24px;
+    border-radius: 12px;
+  }
+}
+.game-over-box {
+  margin-top: 22px;
+  padding: 18px;
+  border-radius: 18px;
+  background: rgba(239, 68, 68, 0.14);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: white;
+}
+
+.game-over-box h2 {
+  color: #f87171;
+  margin-bottom: 8px;
+}
+
+.game-over-box p {
+  color: #fecaca;
+}
